@@ -63,7 +63,7 @@ section h2 {
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: #18BC9C;
+  color: #D0D0D0;
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
@@ -71,7 +71,7 @@ section h2 {
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: #18BC9C;
+  color: #450F5D;
 }
 
 #mainNav .navbar-toggler {
@@ -102,7 +102,7 @@ section h2 {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #18BC9C;
+    background: #450F5D;
   }
   #mainNav.navbar-shrink {
     padding-top: 8px;
@@ -207,25 +207,17 @@ a:focus, a:hover, a:active {
 }
 
 .bg-primary {
-  background-color: #18BC9C !important;
+  background-color: #450F5D !important;
+}
+
+button.bg-primary:hover, button.bg-primary:focus {
+  background-color: #9b359a !important;
 }
 
 .bg-secondary {
-  background-color: #2C3E50 !important;
+  background-color: #1a252f !important;
 }
 
-.text-primary {
-  color: #18BC9C !important;
-}
-
-.text-secondary {
-  color: #2C3E50 !important;
-}
-
-.btn-primary {
-  background-color: #18BC9C;
-  border-color: #18BC9C;
-}
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background-color: #128f76;

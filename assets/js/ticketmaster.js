@@ -20,13 +20,15 @@ var TicketMasterEvent = function() {
     }
 
     function logEventData(response) {
+    		//initial read in of the data for the list items.
+    		//TODO: create template for the list, and append the list to the page
         var items = response._embedded.events;
         items.forEach(function(event) {
-        		console.log(event);
-            console.log(event.name);
-            console.log(event.images[0].url);
-            console.log(event._embedded.venues["0"].name);
-            console.log(event.dates.start.localDate);
+        		// console.log(event);
+          //   console.log(event.name);
+          //   console.log(event.images[0].url);
+          //   console.log(event._embedded.venues["0"].name);
+          //   console.log(event.dates.start.localDate);
         });
     }
     //call functions that should run on initialize

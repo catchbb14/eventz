@@ -79,6 +79,12 @@ section h2 {
   padding: 12px;
 }
 
+.navbar img {
+  height: 55px;
+  -webkit-filter: drop-shadow(3px 2px 40px #d0d0d0);
+  filter: drop-shadow(3px 2px 40px #d0d0d0)
+}
+
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 24px;
@@ -154,22 +160,6 @@ header.masthead h2 {
   margin-bottom: 15px;
 }
 
-.events .events-item .events-item-caption {
-  -webkit-transition: all ease 0.5s;
-  -moz-transition: all ease 0.5s;
-  transition: all ease 0.5s;
-  opacity: 0;
-  background-color: rgba(24, 188, 156, 0.9);
-}
-
-.events .events-item .events-item-caption:hover {
-  opacity: 1;
-}
-
-.events .events-item .events-item-caption .events-item-caption-content {
-  font-size: 24px;
-}
-
 @media (min-width: 576px) {
   .events {
     margin-bottom: -30px;
@@ -218,7 +208,6 @@ button.bg-primary:hover, button.bg-primary:focus {
   background-color: #1a252f !important;
 }
 
-
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background-color: #128f76;
   border-color: #128f76;
@@ -232,4 +221,26 @@ button.bg-primary:hover, button.bg-primary:focus {
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
   background-color: #1a252f;
   border-color: #1a252f;
+}
+
+.btn-venue-details, .btn-event-details {
+  background-color: #450F5D;
+  color: #fff;
+}
+
+.btn-venue-details:hover, .btn-event-details:hover {
+  background-color: #9b359a;
+}
+
+.event-item {
+  padding: 20px;
+  border-radius: 25px;
+  background-color: #D0D0D0;
+}
+
+.event-item img {
+  border: 5px solid;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
 }

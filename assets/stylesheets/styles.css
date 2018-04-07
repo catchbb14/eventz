@@ -1,0 +1,243 @@
+body {
+  font-family: 'Lato';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  font-family: 'Montserrat';
+}
+
+section {
+  padding: 96px 0;
+}
+
+section h2 {
+  font-size: 36px;
+  line-height: 32px;
+}
+
+@media (min-width: 992px) {
+  section h2 {
+    font-size: 48px;
+    line-height: 40px;
+  }
+}
+
+.btn-xl {
+  padding: 16px 28px;
+  font-size: 20px;
+}
+
+.btn-social {
+  width: 52px;
+  height: 52px;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+#mainNav {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-weight: 700;
+  font-family: 'Montserrat';
+}
+
+#mainNav .navbar-brand {
+  color: #fff;
+}
+
+#mainNav .navbar-nav {
+  margin-left: auto!important;
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+
+#mainNav .nav-link {
+  padding-left: 1rem!important;
+  padding-right: 0!important;
+  padding-bottom: 1rem!important;
+}
+
+#mainNav .navbar-nav li.nav-item a.nav-link {
+  color: #fff;
+}
+
+#mainNav .navbar-nav li.nav-item a.nav-link:hover {
+  color: #18BC9C;
+}
+
+#mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
+  color: #fff;
+}
+
+#mainNav .navbar-nav li.nav-item a.nav-link.active {
+  color: #18BC9C;
+}
+
+#mainNav .navbar-toggler {
+  font-size: 80%;
+  padding: 12px;
+}
+
+@media (min-width: 992px) {
+  #mainNav {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
+    -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
+    transition: padding-top 0.3s, padding-bottom 0.3s;
+  }
+  #mainNav .navbar-brand {
+    font-size: 32px;
+    -webkit-transition: font-size 0.3s;
+    -moz-transition: font-size 0.3s;
+    transition: font-size 0.3s;
+  }
+  #mainNav .navbar-nav {
+    margin-top: 0;
+  }
+  #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
+    color: #fff;
+    background: #18BC9C;
+  }
+  #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
+    color: #fff;
+    background: #18BC9C;
+  }
+  #mainNav.navbar-shrink {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  #mainNav.navbar-shrink .navbar-brand {
+    font-size: 24px;
+  }
+}
+
+header.masthead {
+  color: #fff;
+  padding-top: calc(96px + 72px);
+  padding-bottom: 96px;
+}
+
+header.masthead h1 {
+  font-size: 48px;
+  line-height: 48px;
+}
+
+header.masthead h2 {
+  font-size: 20px;
+  font-family: 'Lato';
+}
+
+@media (min-width: 992px) {
+  header.masthead {
+    padding-top: calc(96px + 106px);
+    padding-bottom: 96px;
+  }
+  header.masthead h1 {
+    font-size: 76px;
+    line-height: 64px;
+  }
+  header.masthead h2 {
+    font-size: 28px;
+  }
+}
+
+.events {
+  margin-bottom: -15px;
+}
+
+.events .events-item {
+  position: relative;
+  display: block;
+  max-width: 280px;
+  margin-bottom: 15px;
+}
+
+.events .events-item .events-item-caption {
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  opacity: 0;
+  background-color: rgba(24, 188, 156, 0.9);
+}
+
+.events .events-item .events-item-caption:hover {
+  opacity: 1;
+}
+
+.events .events-item .events-item-caption .events-item-caption-content {
+  font-size: 24px;
+}
+
+@media (min-width: 576px) {
+  .events {
+    margin-bottom: -30px;
+  }
+  .events .events-item {
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+
+}
+
+.footer {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #2C3E50;
+  color: #fff;
+}
+
+.copyright {
+  background-color: #1a252f;
+}
+
+a {
+  color: #18BC9C;
+}
+
+a:focus, a:hover, a:active {
+  color: #128f76;
+}
+
+.btn {
+  border-width: 2px;
+}
+
+.bg-primary {
+  background-color: #18BC9C !important;
+}
+
+.bg-secondary {
+  background-color: #2C3E50 !important;
+}
+
+.text-primary {
+  color: #18BC9C !important;
+}
+
+.text-secondary {
+  color: #2C3E50 !important;
+}
+
+.btn-primary {
+  background-color: #18BC9C;
+  border-color: #18BC9C;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #128f76;
+  border-color: #128f76;
+}
+
+.btn-secondary {
+  background-color: #2C3E50;
+  border-color: #2C3E50;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+  background-color: #1a252f;
+  border-color: #1a252f;
+}

@@ -35,20 +35,6 @@ section h2 {
   line-height: 32px;
 }
 
-.scroll-to-top {
-  z-index: 1042;
-  right: 16px;
-  bottom: 16px;
-  display: none;
-}
-
-.scroll-to-top a {
-  width: 56px;
-  height: 56px;
-  background-color: rgba(33, 37, 41, 0.5);
-  line-height: 50px;
-}
-
 #mainNav {
   padding-top: 16px;
   padding-bottom: 16px;
@@ -193,64 +179,8 @@ header.masthead h2 {
   }
 }
 
-
-
 @media (min-width: 768px) {
 
-}
-
-.floating-label-form-group {
-  position: relative;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.floating-label-form-group input,
-.floating-label-form-group textarea {
-  font-size: 24px;
-  position: relative;
-  z-index: 1;
-  padding-right: 0;
-  padding-left: 0;
-  resize: none;
-  border: none;
-  border-radius: 0;
-  background: none;
-  box-shadow: none !important;
-}
-
-.floating-label-form-group label {
-  font-size: 14px;
-  line-height: 24px;
-  position: relative;
-  z-index: 0;
-  top: 30px;
-  display: block;
-  margin: 0;
-  -webkit-transition: top 0.3s ease, opacity 0.3s ease;
-  -moz-transition: top 0.3s ease, opacity 0.3s ease;
-  -ms-transition: top 0.3s ease, opacity 0.3s ease;
-  transition: top 0.3s ease, opacity 0.3s ease;
-  vertical-align: middle;
-  vertical-align: baseline;
-  opacity: 0;
-}
-
-.floating-label-form-group:not(:first-child) {
-  padding-left: 14px;
-  border-left: 1px solid #e9ecef;
-}
-
-.floating-label-form-group-with-value label {
-  top: 0;
-  opacity: 1;
-}
-
-.floating-label-form-group-with-focus label {
-  color: #18BC9C;
-}
-
-form .row:first-child .floating-label-form-group {
-  border-top: 1px solid #e9ecef;
 }
 
 .footer {

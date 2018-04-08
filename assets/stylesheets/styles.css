@@ -122,7 +122,7 @@ section h2 {
 header.masthead {
   color: #fff;
   padding-top: calc(96px + 72px);
-  padding-bottom: 96px;
+  padding-bottom: 275px;
 }
 
 header.masthead h1 {
@@ -138,7 +138,7 @@ header.masthead h2 {
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(96px + 106px);
-    padding-bottom: 96px;
+    padding-bottom: 250px;
   }
   header.masthead h1 {
     font-size: 76px;
@@ -232,6 +232,15 @@ button.bg-primary:hover, button.bg-primary:focus {
   background-color: #9b359a;
 }
 
+.btn-search-submit {
+  background-color: #338094;
+  color: #fff;
+}
+
+.btn-search-submit:hover {
+  background-color: #3D8DAC;
+}
+
 .event-item {
   padding: 20px;
   border-radius: 25px;
@@ -243,4 +252,14 @@ button.bg-primary:hover, button.bg-primary:focus {
   border-radius: 10px;
   width: 150px;
   height: 150px;
+}
+
+.search-form {
+  padding: 20px;
+  background-color: #9b359a;
+  border-radius: 5px;
+}
+
+.search-form input {
+  margin-bottom: 10px;
 }

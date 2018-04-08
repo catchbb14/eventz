@@ -57,9 +57,9 @@ var TicketMasterEvent = function() {
 			        </div>
 			        <hr>`;
         });
-        $('#events').find('h2').empty();
+        $('#events').find('.events-list').empty();
         //append our html elements to the events location
-        $('#events').find('h2').append(html);
+        $('#events').find('.events-list').append(html);
     }
 
     /**

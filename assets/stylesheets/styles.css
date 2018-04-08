@@ -223,12 +223,12 @@ button.bg-primary:hover, button.bg-primary:focus {
   border-color: #1a252f;
 }
 
-.btn-venue-details, .btn-event-details {
+.btn-venue-details, .btn-event-details, .get-weather {
   background-color: #450F5D;
   color: #fff;
 }
 
-.btn-venue-details:hover, .btn-event-details:hover {
+.btn-venue-details:hover, .btn-event-details:hover, .get-weather:hover {
   background-color: #9b359a;
 }
 

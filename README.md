@@ -14,7 +14,7 @@
 
 3. Do a `git pull` to get the latest copy of master
 
-4. Create your new branch to code your story, `git checkout -b <branchname>`
+4. Create your new branch to code your story, `git checkout -b <branchname>` (Title your branch name the title of the story you're working on, replace spaces with -)
 
 5. Now you're on your own branch. Type `git branch` to see you're on your new branch.
 

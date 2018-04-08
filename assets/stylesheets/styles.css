@@ -122,7 +122,7 @@ section h2 {
 header.masthead {
   color: #fff;
   padding-top: calc(96px + 72px);
-  padding-bottom: 275px;
+  padding-bottom: 425px;
 }
 
 header.masthead h1 {
@@ -138,7 +138,7 @@ header.masthead h2 {
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(96px + 106px);
-    padding-bottom: 250px;
+    padding-bottom: 340px;
   }
   header.masthead h1 {
     font-size: 76px;

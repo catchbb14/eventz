@@ -1,41 +1,74 @@
 var TicketMasterEvent = function() {
-    console.log('TicketMasterEvent');
-    //private functions
+    
+		var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+
+    /**
+     * getEventData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2)
+     * getEventData passes the response to createEventElements if the ajax call is successful
+     * TODO: make getEventData recieve a zip code as a query parameter
+     */
     function getEventData() {
-        //TODO make postal code dynamic
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events.json?size=10&postalCode=27606&apikey=tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy",
+            url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&postalCode=27606&apikey=${apikey}`,
             success: function(response) {
-                logEventData(response);
-
-                // Parse the response.
-                // Do other things.
-                // passing the response to other functions
+                createEventElements(response);
             },
             error: function(xhr, status, err) {
-                // This time, we do not end up here!
+                // we have an error, log it.
+                console.log('Error with TicketMasterEvent ' + err);
             }
         });
     }
 
-    function logEventData(response) {
-    		//initial read in of the data for the list items.
-    		//TODO: create template for the list, and append the list to the page
+    /**
+     * createEventElements accepts a response from the ajax call, and loops through the events 
+     * to create the html divs, then once the div is done looping, append the html elements
+     * to the page
+     */
+    function createEventElements(response) {
         var items = response._embedded.events;
+        var html = '';
+
         items.forEach(function(event) {
-        		// console.log(event);
-          //   console.log(event.name);
-          //   console.log(event.images[0].url);
-          //   console.log(event._embedded.venues["0"].name);
-          //   console.log(event.dates.start.localDate);
+            var eventName = event.name;
+            var eventImage = event.images[0].url;
+            var venueName = event._embedded.venues["0"].name;
+            var eventDate = event.dates.start.localDate;
+            html += `
+			        <div class="row">
+			          <div class="col-md-12 event-item">
+			            <div class="col-md-3 float-left">
+			              <img src="${eventImage}">
+			            </div>
+			            <div class="col-md-6 float-left text-left">
+			              <h6>${eventName}</h6>
+			              <h4>Venue: ${venueName}</h4>
+			              <h6>${eventDate}</h6>
+			              <button class="btn btn-venue-details">Venue Details</button>
+			              <button class="btn btn-event-details">Event Details</button>
+			            </div>
+			            <div class="col-md-3 float-left">
+			              <h6>Eric's weather widget here</h6>
+			            </div>
+			          </div>
+			        </div>
+			        <hr>`;
         });
+        //append our html elements to the events location
+        $('#events').find('h2').append(html);
     }
-    //call functions that should run on initialize
+
+    /**
+     * init holds the functions we want to run when the TicketMasterEvent module is initialized
+     */
     function init() {
         getEventData();
     }
-    //return init, assign init to the init function
+    
+    /**
+     * we assign init to the init function above
+     */
     return {
         init: init
     }
@@ -43,5 +76,3 @@ var TicketMasterEvent = function() {
 
 //kickoff our TicketMasterEvent feature - call Module.init();
 TicketMasterEvent.init();
-
-

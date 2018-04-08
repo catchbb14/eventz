@@ -37,9 +37,10 @@ var TicketMasterEvent = function() {
             var eventImage = event.images[0].url;
             var venueName = event._embedded.venues["0"].name;
             var eventDate = event.dates.start.localDate;
+            var zip = event._embedded.venues["0"].postalCode;
             html += `
 			        <div class="row">
-			          <div class="col-md-12 event-item">
+			          <div class="col-md-12 event-item" data-zip="${zip}" data-date="${eventDate}">
 			            <div class="col-md-3 float-left">
 			              <img src="${eventImage}">
 			            </div>

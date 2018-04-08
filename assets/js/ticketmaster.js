@@ -7,12 +7,15 @@ var TicketMasterEvent = function() {
      * getEventData passes the response to createEventElements if the ajax call is successful
      * TODO: make getEventData recieve a zip code as a query parameter
      */
-    function getEventData(event, zipCode) {
+    function getEventData(event, city, state, zipCode) {
         var event = event || '';
-        var zipCode = zipCode || 27606;
+        var city = city || '';
+        var state = state || '';
+        var zipCode = zipCode || '';
+
         $.ajax({
             type: "GET",
-            url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&keyword=${event}&postalCode=${zipCode}&apikey=${apikey}`,
+            url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&keyword=${event}&city=${city}&state=${state}&postalCode=${zipCode}&apikey=${apikey}`,
             success: function(response) {
                 createEventElements(response);
             },
@@ -71,8 +74,11 @@ var TicketMasterEvent = function() {
         //on click event for the search form passes event and zipcode to ajax function
         $(document).on('click', '#search', function() {
             var event = $('#search-event').val().trim();
+            var city = $('#search-city').val().trim();
+            var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
-            getEventData(event, zip);
+
+            getEventData(event, city, state, zip);
         });
     }
 

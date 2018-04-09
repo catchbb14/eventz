@@ -131,7 +131,6 @@ var TicketMasterVenueDetails = function() {
      * getVenueDetailsData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#venue-details-v2)
      */
     function getVenueDetailsData(venueId, theEvent) {
-        console.log(venueId);
         $.ajax({
             type:"GET",
             url:`https://app.ticketmaster.com/discovery/v2/venues/${venueId}.json?apikey=${apikey}`,
@@ -149,7 +148,7 @@ var TicketMasterVenueDetails = function() {
      * Gives information such as parking, box office info, address, link to the venue etc.
      */
     function createVenueElements(response, theEvent) {
-        console.log(response);
+        // console.log(response);
 
         var targetDivId = theEvent.siblings('.venue');
         var venue = response;
@@ -234,7 +233,6 @@ var TicketMasterEventDetails = function() {
      * getVenueDetailsData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#event-details-v2)
      */
     function getEventDetailsData(eventId, theEvent) {
-        console.log(eventId);
         $.ajax({
             type:"GET",
             url:`https://app.ticketmaster.com/discovery/v2/events/${eventId}.json?apikey=${apikey}`,
@@ -252,7 +250,7 @@ var TicketMasterEventDetails = function() {
      * Gives information such as ...
      */
     function createEventElements(response, theEvent) {
-        console.log(response);
+        // console.log(response);
 
         var targetDivId = theEvent.siblings('.event');
         var event = response;

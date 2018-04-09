@@ -90,6 +90,9 @@ var WeatherWidgetEvent = function() {
         $(event).find('.weather-widget').append('<p>No data available, too far to tell!</p>');
     }
 
+    /**
+     * Handles the one possible click event to send the appropriate data to the AJAX request
+     */
     function clickEventHandlers() {
         $(document).on('click', '.get-weather', function() {
             event = $(this).parents('.event-item');
@@ -101,7 +104,9 @@ var WeatherWidgetEvent = function() {
         });
     }
 
-
+    /**
+     * Function to initalize necessary processes on-load
+     */
     function init() {
         clickEventHandlers();
     }

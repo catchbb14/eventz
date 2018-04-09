@@ -36,6 +36,7 @@ var TicketMasterEvent = function() {
         var html = '';
 
         items.forEach(function(event) {
+            var eventId = event.id;
             var eventName = event.name;
             var eventImage = event.images[0].url;
             var venueName = event._embedded.venues["0"].name;
@@ -43,7 +44,7 @@ var TicketMasterEvent = function() {
             var zip = event._embedded.venues["0"].postalCode;
             html += `
 			        <div class="row">
-			          <div class="col-md-12 event-item" data-zip="${zip}" data-date="${eventDate}">
+			          <div class="col-md-12 event-item" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
 			            <div class="col-md-3 float-left">
 			              <img src="${eventImage}">
 			            </div>

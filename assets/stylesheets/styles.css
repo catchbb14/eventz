@@ -271,3 +271,40 @@ button.bg-primary:hover, button.bg-primary:focus {
   width: 60px !important;
   border: none !important;
 }
+
+.details {
+  margin-top:10px;
+  padding: 10px;
+  height: 100%;
+  background-color: #450F5D;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.venue {
+  margin-bottom: 10px;
+}
+
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical; 
+}
+
+.title {
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: 700;
+  color: #D0D0D0;
+}
+
+.seatmap {
+  width: 200px;
+}
+
+.close-tab {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}

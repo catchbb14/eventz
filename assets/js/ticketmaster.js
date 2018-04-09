@@ -88,6 +88,13 @@ var TicketMasterEvent = function() {
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
 
+            database.ref("search/").push({
+                event: event,
+                city: city,
+                state: state,
+                zip: zip
+            });
+
             getEventData(event, city, state, zip);
         });
 

@@ -85,6 +85,8 @@ section h2 {
   filter: drop-shadow(3px 2px 40px #d0d0d0)
 }
 
+
+
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 24px;
@@ -262,4 +264,10 @@ button.bg-primary:hover, button.bg-primary:focus {
 
 .search-form input {
   margin-bottom: 10px;
+}
+
+.weather_icon {
+  height: 60px !important; 
+  width: 60px !important;
+  border: none !important;
 }

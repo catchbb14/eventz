@@ -42,7 +42,7 @@ var TicketMasterEvent = function() {
         items.forEach(function(event) {
             var venueId = event._embedded.venues["0"].id || 'Data Not Available';
             var eventId = event.id || 'Data Not Available';
-            var eventName = event.name || '';
+            var eventName = event.name || 'Data Not Available';
             var eventImage = event.images[0].url || 'Data Not Available';
             var venueName = event._embedded.venues["0"].name || 'Data Not Available';
             var eventDate = event.dates.start.localDate || 'Data Not Available';

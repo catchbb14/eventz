@@ -128,12 +128,24 @@ var TicketMasterVenueDetails = function() {
             type:"GET",
             url:`https://app.ticketmaster.com/discovery/v2/venues/${venueId}.json?apikey=${apikey}`,
             success: function(response) {
-                console.log(response);
+                createVenueElements(response);
             },
             error: function(xhr, status, err) {
                 console.log('Error with TicketMasterVenueDetails ' + err);
             }
         });
+    }
+
+    function createVenueElements(response) {
+        console.log(response);
+        var html = `
+            <div>
+                ${response.name}
+            </div>
+        `;
+        $('body').append(html);
+        // $(this).css('border', '2px solid red');
+
     }
 
     /**

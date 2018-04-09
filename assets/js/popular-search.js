@@ -26,6 +26,7 @@ var PopularSearch = function() {
      * displayMostRecentlySearched displays the 10 most recent searches from our firebase database
      */
     function displayMostRecentlySearched(mostRecentlySearched) {
+        mostRecentlySearched = mostRecentlySearched.reverse();
         mostRecentlySearched.forEach(function( eventSearched, index ) {
         	if(index < 10) {
 	        	var html = `

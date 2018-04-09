@@ -254,8 +254,9 @@ var TicketMasterEventDetails = function() {
 
         var targetDivId = theEvent.siblings('.event');
         var event = response;
-        var maxPrice = event.priceRanges["0"].max || 'Data Not Available';
-        var minPrice = event.priceRanges["0"].min || 'Data Not Available';
+        var prices = event.priceRanges || 'Data Not Available';
+        var maxPrice = prices["0"].max || 'Data Not Available';
+        var minPrice = prices["0"].min || 'Data Not Available';
         var status = event.dates.status.code || 'Data Not Available';
         var timezone = event.dates.timezone || 'Data Not Available';
         var name = event.name || 'Data Not Available';

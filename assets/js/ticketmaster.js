@@ -266,6 +266,16 @@ var TicketMasterEventDetails = function() {
         var segmentName = event.classifications["0"].segment.name || 'Data Not Available';
         var date = event.dates.start.localDate || 'Data Not Available';
         var time = event.dates.start.localTime || 'Data Not Available';
+        
+        var eventDate = moment(date);
+        var currentDate = moment().format();
+        var daysFromNow = moment(eventDate).diff(moment(currentDate), 'days');
+        var timeRemaining = '';
+        if(daysFromNow > 0) {
+            timeRemaining += `<div>Only ${daysFromNow} days remaining!</div>`; 
+        } else {
+            timeRemaining += "<div>It's today, hope you're ready!</div>"
+        }
         var html = `
                     <div class="details">
                         <h4 class="text-center">${name} Event Details</h4>
@@ -288,8 +298,11 @@ var TicketMasterEventDetails = function() {
                         </div>
                         <div class="col-md-3 float-left text-center">
                             <div class="title">Days Until the Event</div>
-                            <div>${date}</div>
-                            <div>${time}</div>
+                            ${timeRemaining}
+                            <div class="text-center">
+                                The event is on ${moment(date).format('ddd, MMM Do')} at
+                                ${moment(time, 'HH:mm:ss').format("h:mm a")}.
+                            </div>
                         </div>
                     </div>
         `;

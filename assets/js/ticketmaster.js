@@ -40,13 +40,13 @@ var TicketMasterEvent = function() {
         var html = '';
 
         items.forEach(function(event) {
-            var venueId = event._embedded.venues["0"].id;
-            var eventId = event.id;
-            var eventName = event.name;
-            var eventImage = event.images[0].url;
-            var venueName = event._embedded.venues["0"].name;
-            var eventDate = event.dates.start.localDate;
-            var zip = event._embedded.venues["0"].postalCode;
+            var venueId = event._embedded.venues["0"].id || 'Data Not Available';
+            var eventId = event.id || 'Data Not Available';
+            var eventName = event.name || 'Data Not Available';
+            var eventImage = event.images[0].url || 'Data Not Available';
+            var venueName = event._embedded.venues["0"].name || 'Data Not Available';
+            var eventDate = event.dates.start.localDate || 'Data Not Available';
+            var zip = event._embedded.venues["0"].postalCode || 'Data Not Available';
             html += `
 			        <div class="row" id="${eventId}">
 			          <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
@@ -156,7 +156,7 @@ var TicketMasterVenueDetails = function() {
         var city = venue.city.name || 'Data Not Available';
         var state = venue.state.stateCode || 'Data Not Available';
         var zipCode = venue.postalCode || 'Data Not Available';
-        var name = venue.name;
+        var name = venue.name || 'Data Not Available';
         var boxOffice = venue.boxOfficeInfo || 'Data Not Available';
         var boxOfficeHours = boxOffice.openHoursDetail || 'Data Not Available';
         var paymentDetails = boxOffice.acceptedPaymentDetail || 'Data Not Available';

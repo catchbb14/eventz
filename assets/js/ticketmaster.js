@@ -88,6 +88,8 @@ var TicketMasterEvent = function() {
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
 
+            clearForm();
+
             database.ref("search/").push({
                 event: event,
                 city: city,
@@ -102,6 +104,13 @@ var TicketMasterEvent = function() {
         $(document).on('click', '.close-tab', function() {
             $(this).parents('.details').remove();
         });
+    }
+
+    /**
+     * clearForm clears the form after the submit button has been searched
+     */
+    function clearForm() {
+        $('#search-event, #search-city, #search-state, #search-zipcode').val('');
     }
 
     /**

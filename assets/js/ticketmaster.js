@@ -54,8 +54,8 @@ var TicketMasterEvent = function() {
 			              <button class="btn btn-venue-details">Venue Details</button>
 			              <button class="btn btn-event-details">Event Details</button>
 			            </div>
-			            <div class="col-md-3 float-left">
-			              <h6>weather widget</h6>
+                        <div class="col-md-3 float-left text-center weather-widget">
+                          <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
                           <button class="btn get-weather">Get Weather</button>
 			            </div>
 			          </div>

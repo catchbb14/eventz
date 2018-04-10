@@ -125,6 +125,7 @@ var TicketMasterEvent = function() {
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
 
+            console.log($('#search-state option:selected')[0]);
             if($('#search-state').options[0].selected == true) {
                 state = '';
             }

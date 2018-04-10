@@ -5,14 +5,32 @@
  */
 var PopularSearch = function() {
 
-    database.ref('/search').on('value', function(snapshot) {
+    //this reads from the database every time a value in /search is modified/added/removed. We were having issues with this for re-initializing the slick.js carousel. So we choose to read once per page load.
+    // database.ref('/search').on('value', function(snapshot) {
+    //     $('#recent-event-searches').empty();
+    //     $('#popular-event-searches').empty();
+    //     var keys = Object.keys(snapshot.val());
+    //     var mostRecentlySearched = [];
+    //     for (var key in snapshot.val()) {
+    //     	var eventSearched = snapshot.val()[key];
+    //     	mostRecentlySearched.push(eventSearched.event);
+    //     }
+
+    //     displayMostRecentlySearched(mostRecentlySearched);
+    //     displayMostPopularSearched(mostRecentlySearched);
+
+    // }, function(errorObject) {
+    //     console.log('the read failed: ' + errorObject.code);
+    // });
+    //this reads from the database ONCE.
+    database.ref('/search').once('value').then(function(snapshot) {
         $('#recent-event-searches').empty();
         $('#popular-event-searches').empty();
         var keys = Object.keys(snapshot.val());
         var mostRecentlySearched = [];
         for (var key in snapshot.val()) {
-        	var eventSearched = snapshot.val()[key];
-        	mostRecentlySearched.push(eventSearched.event);
+            var eventSearched = snapshot.val()[key];
+            mostRecentlySearched.push(eventSearched.event);
         }
 
         displayMostRecentlySearched(mostRecentlySearched);

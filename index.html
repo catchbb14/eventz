@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.css" />
     <!-- include bootstrap library for bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- include lightbox css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
+    <!-- include slickjs css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <!-- include google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <!-- include google font -->
@@ -51,6 +56,7 @@
     <!-- Header -->
     <header class="masthead bg-primary text-center">
       <div class="container">
+        <h4>Eventz is a great way to search for popular events by city, state and or zip code!</h4>
         <div class="col-md-4 float-left">
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group search-form">
@@ -65,8 +71,16 @@
             <button id="search" type="submit" class="btn btn-search-submit float-left">Search</button>
           </form>
         </div>
-          <div class="col-md-8 float-left">
-            <h4>Eventz is a great way to search for popular events by city, state and or zip code!</h4>
+          <div class="col-md-8 float-left text-left">
+            <div class="">
+              <div>Suggested Searches</div>
+              <div>
+                <div>Most Recent Event Searches:</div>
+                <div id="recent-event-searches"></div>
+              </div>
+            </div>
+            <div class="">Most Popular Event Searches: </div>
+              <div id="popular-event-searches"></div>
           </div>
       </div>
     </header>
@@ -75,6 +89,8 @@
     <section class="events" id="events">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0" style="margin-bottom: 30px !important;">Events</h2>
+        <div>Filter by category:</div>
+        <div id="category-buttons"></div>
         <div class="events-list">
           
         </div>
@@ -184,8 +200,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- include bootstrap js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- include lightbox js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+    <!-- include isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <!-- include slick.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <!-- Custom JavaScripts -->
+    <script src="assets/js/database.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/popular-search.js"></script>
     <script src="assets/js/ticketmaster.js"></script>
     <script src="assets/js/weatherbit.js"></script>
   </body>

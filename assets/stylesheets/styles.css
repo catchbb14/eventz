@@ -225,7 +225,7 @@ button.bg-primary:hover, button.bg-primary:focus {
   border-color: #1a252f;
 }
 
-.btn-venue-details, .btn-event-details, .get-weather, .searches {
+.btn-venue-details, .btn-event-details, .get-weather, .searches, .category-button {
   background-color: #450F5D;
   color: #fff;
 }
@@ -235,7 +235,7 @@ button.bg-primary:hover, button.bg-primary:focus {
   margin: 5px;
 }
 
-.btn-venue-details:hover, .btn-event-details:hover, .get-weather:hover, .searches:hover {
+.btn-venue-details:hover, .btn-event-details:hover, .get-weather:hover, .searches:hover, .category-button:hover {
   background-color: #9b359a;
 }
 
@@ -312,4 +312,20 @@ button.bg-primary:hover, button.bg-primary:focus {
   position: absolute;
   top: 20px;
   right: 30px;
+}
+
+.event-item-isotope {
+  position: relative !important;
+  top: 0 !important;
+}
+hr {
+  position: relative !important;
+  display: block !important;
+}
+#category-buttons {
+  margin: 10px;
+}
+
+.events-list {
+  height: 100% !important;
 }

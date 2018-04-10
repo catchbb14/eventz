@@ -5,7 +5,6 @@
 var TicketMasterEvent = function() {
     
 	var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
-    var isotopeIsActive = true;
 
     /**
      * getEventData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2)

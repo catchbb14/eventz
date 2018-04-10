@@ -21,15 +21,17 @@ var TicketMasterEvent = function() {
             type: "GET",
             url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&keyword=${event}&city=${city}&state=${state}&postalCode=${zipCode}&apikey=${apikey}`,
             success: function(response) {
+                console.log(response);
                 createEventElements(response);
+
             },
             error: function(xhr, status, err) {
                 // we have an error, log it.
                 console.log('Error with TicketMasterEvent ' + err);
             }
+            
         });
     }
-
     /**
      * createEventElements accepts a response from the ajax call, and loops through the events 
      * to create the html divs, then once the div is done looping, append the html elements

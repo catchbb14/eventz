@@ -270,6 +270,7 @@ var TicketMasterEventDetails = function() {
 
         var targetDivId = theEvent.siblings('.event');
         var event = response;
+        var eventId = event.id;
         var prices = event.priceRanges || 'Data Not Available';
         var maxPrice = prices["0"].max || 'Data Not Available';
         var minPrice = prices["0"].min || 'Data Not Available';
@@ -309,7 +310,11 @@ var TicketMasterEventDetails = function() {
                         </div>
                         <div class="col-md-3 float-left text-center">
                             <div class="title">Seat Map</div>
-                            <div><img class="seatmap" src="${seatMap}"></div>
+                            <div>
+                                <a href="${seatMap}" data-lightbox="${eventId}" data-title="${name}">
+                                    <img class="seatmap"  src="${seatMap}">
+                                </a>
+                            </div>
                             
                         </div>
                         <div class="col-md-3 float-left text-center">

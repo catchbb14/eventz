@@ -125,6 +125,9 @@ var TicketMasterEvent = function() {
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
 
+            if($('#search-state').options[0].selected == true) {
+                state = '';
+            }
 
             if(zip === "" || function(zip) {
                 return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)
@@ -164,7 +167,7 @@ var TicketMasterEvent = function() {
      */
     function clearForm() {
         $('#search-event, #search-city, #search-zipcode').val('');
-        $('#search-state).options[0].selected=true;
+        $('#search-state').options[0].selected=true;
     }
 
     /**

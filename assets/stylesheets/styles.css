@@ -272,10 +272,6 @@ button.bg-primary:hover, button.bg-primary:focus {
   margin-bottom: 10px;
 }
 
-.search-form select {
-  margin-bottom: 10px;
-}
-
 .weather_icon {
   height: 60px !important; 
   width: 60px !important;

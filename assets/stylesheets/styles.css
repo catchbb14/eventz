@@ -124,7 +124,7 @@ section h2 {
 header.masthead {
   color: #fff;
   padding-top: calc(96px + 72px);
-  padding-bottom: 425px;
+  padding-bottom: 500px;
 }
 
 header.masthead h1 {
@@ -171,8 +171,10 @@ header.masthead h2 {
   }
 }
 
-@media (min-width: 768px) {
-
+@media (max-width: 768px) {
+  .searches:nth-last-of-type(-n+7) {
+    display: none;
+  }
 }
 
 .footer {
@@ -257,8 +259,7 @@ button.bg-primary:hover, button.bg-primary:focus {
 .event-item img {
   border: 5px solid;
   border-radius: 10px;
-  width: 150px;
-  height: 150px;
+  width: 100%;
 }
 
 .search-form {

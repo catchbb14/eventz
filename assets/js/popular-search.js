@@ -35,6 +35,34 @@ var PopularSearch = function() {
 	        	$('#recent-event-searches').append(html);        		
         	}
         });
+        
+        $(document).ready(function(){
+            $('#recent-event-searches').slick({
+                slidesToShow: 5,
+                slidesToScroll: 2,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                      breakpoint: 768,
+                      settings: {
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                      }
+                    },
+                    {
+                      breakpoint: 480,
+                      settings: {
+                        centerPadding: '40px',
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                      }
+                    }
+                ]
+            });
+        });
     }
 
     /**
@@ -62,9 +90,36 @@ var PopularSearch = function() {
 					var html = `
 						<button class="btn searches">${eventSearched}</button>
 					`;
-					$('#popular-event-searches').append(html);					
+					$('#popular-event-searches').append(html);
 				}
 			});
+            $(document).ready(function(){
+                $('#popular-event-searches').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 2,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    responsive: [
+                        {
+                          breakpoint: 768,
+                          settings: {
+                            centerMode: true,
+                            centerPadding: '40px',
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                          }
+                        },
+                        {
+                          breakpoint: 480,
+                          settings: {
+                            centerPadding: '40px',
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                          }
+                        }
+                    ]
+                });
+            });
     }
 
     /**

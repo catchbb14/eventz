@@ -28,7 +28,7 @@ var PopularSearch = function() {
     function displayMostRecentlySearched(mostRecentlySearched) {
         mostRecentlySearched = mostRecentlySearched.reverse();
         mostRecentlySearched.forEach(function( eventSearched, index ) {
-        	if(index < 10) {
+        	if(index < 10 && eventSearched !== '') {
 	        	var html = `
 	        		<button class="btn searches">${eventSearched}</button>
 	        	`;
@@ -58,7 +58,7 @@ var PopularSearch = function() {
 			//reverse the array so we get the most searched term first
 			eventsSorted = eventsSorted.reverse();
 			eventsSorted.forEach(function( eventSearched, index ) {
-				if(index < 10) {
+				if(index < 10 && eventSearched !== '') {
 					var html = `
 						<button class="btn searches">${eventSearched}</button>
 					`;

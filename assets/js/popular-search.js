@@ -78,13 +78,13 @@ var PopularSearch = function() {
     	});
     };
 	
-		function init() {
-			insertValuesIntoFormByButtonClick();
-		}
+	function init() {
+		insertValuesIntoFormByButtonClick();
+	}
 
-		return {
-			init: init
-		}
+	return {
+		init: init
+	}
 }();
 
 PopularSearch.init();

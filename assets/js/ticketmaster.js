@@ -38,6 +38,8 @@ var TicketMasterEvent = function() {
     function createEventElements(response) {
         var items = response._embedded.events;
         var html = '';
+        var isotopesArray = [];
+        var isotopeHTML = '';
 
         items.forEach(function(event) {
             var venueId = event._embedded.venues["0"].id || 'Data Not Available';
@@ -47,8 +49,31 @@ var TicketMasterEvent = function() {
             var venueName = event._embedded.venues["0"].name || 'Data Not Available';
             var eventDate = event.dates.start.localDate || 'Data Not Available';
             var zip = event._embedded.venues["0"].postalCode || 'Data Not Available';
+            //some events don't have classifications, this checks to see if there is classifications to get the segment name and replaces special characters and spaces so they can be used as classes
+            if (typeof event.classifications !== "undefined") {
+                var classifications = event.classifications;
+                var isotopes = classifications["0"].segment.name;
+                isotopes = isotopes.replace("&", "and");
+                isotopes = isotopes.replace(/\s+/g, '-')
+            }
+
+            //if the isotopesArray does not include the isotope, add it to the array and create a button
+            if(!isotopesArray.includes(isotopes)) {
+                //if its the first item, add the all button to be able to view all filters
+                if(isotopesArray.length === 0) {
+                    isotopesArray.push('*');
+                    isotopeHTML += `
+                        <button class="btn category-button" data-filter=".*">View All</button>
+                    `;
+                }
+                isotopesArray.push(isotopes);
+                isotopeHTML += `
+                    <button class="btn category-button" data-filter=".${isotopes}">${isotopes}</button>
+                `;
+            }
+
             html += `
-			        <div class="row" id="${eventId}">
+			        <div class="event-item-isotope row ${isotopes}" id="${eventId}">
 			          <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
 			            <div class="col-md-3 float-left">
 			              <img src="${eventImage}">
@@ -69,8 +94,10 @@ var TicketMasterEvent = function() {
                         <div class="event col-md-12"></div>
 			        </div>
 
-			        <hr>`;
+			        `;
         });
+        $('#category-buttons').empty();
+        $('#category-buttons').append(isotopeHTML);
         $('#events').find('.events-list').empty();
         //append our html elements to the events location
         $('#events').find('.events-list').append(html);
@@ -104,6 +131,15 @@ var TicketMasterEvent = function() {
         $(document).on('click', '.close-tab', function() {
             $(this).parents('.details').remove();
         });
+
+        //when the user clicks on a category button - this is the isotope functionality
+        $(document).on('click', '.category-button', function() {
+            var filter = $(this).attr('data-filter');
+            $('.events-list').isotope('destroy');
+            $('.events-list').isotope({
+                filter: filter
+            });
+        });
     }
 
     /**
@@ -117,7 +153,6 @@ var TicketMasterEvent = function() {
      * init holds the functions we want to run when the TicketMasterEvent module is initialized
      */
     function init() {
-        getEventData();
         clickEventHandlers();
     }
     
@@ -164,7 +199,6 @@ var TicketMasterVenueDetails = function() {
      * Gives information such as parking, box office info, address, link to the venue etc.
      */
     function createVenueElements(response, theEvent) {
-        // console.log(response);
 
         var targetDivId = theEvent.siblings('.venue');
         var venue = response;
@@ -266,7 +300,6 @@ var TicketMasterEventDetails = function() {
      * Gives information such as ...
      */
     function createEventElements(response, theEvent) {
-        // console.log(response);
 
         var targetDivId = theEvent.siblings('.event');
         var event = response;

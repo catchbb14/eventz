@@ -93,7 +93,6 @@ var TicketMasterEvent = function() {
             if(zip === "" || function(zip) {
                 return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)
             }) {
-                console.log(zip)
                 getEventData(event, city, state, zip);
             }
             

@@ -22,6 +22,7 @@ var TicketMasterEvent = function() {
             url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&keyword=${event}&city=${city}&state=${state}&postalCode=${zipCode}&apikey=${apikey}`,
             success: function(response) {
                 createEventElements(response);
+                
             },
             error: function(xhr, status, err) {
                 // we have an error, log it.
@@ -76,6 +77,7 @@ var TicketMasterEvent = function() {
         $('#events').find('.events-list').append(html);
     }
 
+
     /**
      * clickEventHandlers handles the click events associated with the ticketmaster events api
      * Here we pass values from the search form, to the ajax function getEventData()
@@ -88,7 +90,13 @@ var TicketMasterEvent = function() {
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
 
-            getEventData(event, city, state, zip);
+            if(zip === "" || function(zip) {
+                return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)
+            }) {
+                console.log(zip)
+                getEventData(event, city, state, zip);
+            }
+            
         });
 
         // when the user clicks the close tab

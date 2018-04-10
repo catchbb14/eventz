@@ -22,7 +22,6 @@ var TicketMasterEvent = function() {
             url: `https://app.ticketmaster.com/discovery/v2/events.json?size=10&keyword=${event}&city=${city}&state=${state}&postalCode=${zipCode}&apikey=${apikey}`,
             success: function(response) {
                 createEventElements(response);
-                
             },
             error: function(xhr, status, err) {
                 // we have an error, log it.
@@ -111,7 +110,6 @@ var TicketMasterEvent = function() {
         $('#events').find('.events-list').append(html);
         $('.events-list').isotope('destroy');
     }
-
 
     /**
      * clickEventHandlers handles the click events associated with the ticketmaster events api

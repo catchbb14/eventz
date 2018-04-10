@@ -5,6 +5,7 @@
 var TicketMasterEvent = function() {
     
 	var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+    var isotopeIsActive = true;
 
     /**
      * getEventData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2)
@@ -36,71 +37,79 @@ var TicketMasterEvent = function() {
      * to the page
      */
     function createEventElements(response) {
-        var items = response._embedded.events;
+        var items = (typeof response._embedded != 'undefined') ? response._embedded.events : false;
         var html = '';
         var isotopesArray = [];
         var isotopeHTML = '';
+        //if there are event items, create events
+        if(items !== false) {
+            items.forEach(function(event) {
+                var venueId = event._embedded.venues["0"].id || 'Data Not Available';
+                var eventId = event.id || 'Data Not Available';
+                var eventName = event.name || 'Data Not Available';
+                var eventImage = event.images[0].url || 'Data Not Available';
+                var venueName = event._embedded.venues["0"].name || 'Data Not Available';
+                var eventDate = event.dates.start.localDate || 'Data Not Available';
+                var zip = event._embedded.venues["0"].postalCode || 'Data Not Available';
+                //some events don't have classifications, this checks to see if there is classifications to get the segment name and replaces special characters and spaces so they can be used as classes
+                if (typeof event.classifications !== "undefined") {
+                    var classifications = event.classifications;
+                    var isotopes = classifications["0"].segment.name;
+                    isotopes = isotopes.replace("&", "and");
+                    isotopes = isotopes.replace(/\s+/g, '-')
+                }
 
-        items.forEach(function(event) {
-            var venueId = event._embedded.venues["0"].id || 'Data Not Available';
-            var eventId = event.id || 'Data Not Available';
-            var eventName = event.name || 'Data Not Available';
-            var eventImage = event.images[0].url || 'Data Not Available';
-            var venueName = event._embedded.venues["0"].name || 'Data Not Available';
-            var eventDate = event.dates.start.localDate || 'Data Not Available';
-            var zip = event._embedded.venues["0"].postalCode || 'Data Not Available';
-            //some events don't have classifications, this checks to see if there is classifications to get the segment name and replaces special characters and spaces so they can be used as classes
-            if (typeof event.classifications !== "undefined") {
-                var classifications = event.classifications;
-                var isotopes = classifications["0"].segment.name;
-                isotopes = isotopes.replace("&", "and");
-                isotopes = isotopes.replace(/\s+/g, '-')
-            }
-
-            //if the isotopesArray does not include the isotope, add it to the array and create a button
-            if(!isotopesArray.includes(isotopes)) {
-                //if its the first item, add the all button to be able to view all filters
-                if(isotopesArray.length === 0) {
-                    isotopesArray.push('*');
+                //if the isotopesArray does not include the isotope, add it to the array and create a button
+                if(!isotopesArray.includes(isotopes)) {
+                    //if its the first item, add the all button to be able to view all filters
+                    if(isotopesArray.length === 0) {
+                        isotopesArray.push('*');
+                        isotopeHTML += `
+                            <button class="btn category-button" data-filter="*">View All</button>
+                        `;
+                    }
+                    isotopesArray.push(isotopes);
                     isotopeHTML += `
-                        <button class="btn category-button" data-filter=".*">View All</button>
+                        <button class="btn category-button" data-filter=".${isotopes}">${isotopes}</button>
                     `;
                 }
-                isotopesArray.push(isotopes);
-                isotopeHTML += `
-                    <button class="btn category-button" data-filter=".${isotopes}">${isotopes}</button>
-                `;
-            }
 
+                html += `
+                        <div class="event-item-isotope row ${isotopes}" id="${eventId}">
+                          <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
+                            <div class="col-md-3 float-left">
+                              <img src="${eventImage}">
+                            </div>
+                            <div class="col-md-6 float-left text-left">
+                              <h6>${eventName}</h6>
+                              <h4>Venue: ${venueName}</h4>
+                              <h6>${eventDate}</h6>
+                              <button class="btn btn-venue-details">Venue Details</button>
+                              <button class="btn btn-event-details">Event Details</button>
+                            </div>
+                            <div class="col-md-3 float-left text-center weather-widget">
+                              <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
+                              <button class="btn get-weather">Get Weather</button>
+                            </div>
+                          </div>
+                            <div class="venue col-md-12"></div>
+                            <div class="event col-md-12"></div>
+                        </div>
+
+                        `;
+            });            
+        } else {
             html += `
-			        <div class="event-item-isotope row ${isotopes}" id="${eventId}">
-			          <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
-			            <div class="col-md-3 float-left">
-			              <img src="${eventImage}">
-			            </div>
-			            <div class="col-md-6 float-left text-left">
-			              <h6>${eventName}</h6>
-			              <h4>Venue: ${venueName}</h4>
-			              <h6>${eventDate}</h6>
-			              <button class="btn btn-venue-details">Venue Details</button>
-			              <button class="btn btn-event-details">Event Details</button>
-			            </div>
-                        <div class="col-md-3 float-left text-center weather-widget">
-                          <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
-                          <button class="btn get-weather">Get Weather</button>
-			            </div>
-			          </div>
-                        <div class="venue col-md-12"></div>
-                        <div class="event col-md-12"></div>
-			        </div>
+                <div>Oh no! No search results were found for that search criteria. :(</div>
+            `;
+        }
 
-			        `;
-        });
         $('#category-buttons').empty();
         $('#category-buttons').append(isotopeHTML);
         $('#events').find('.events-list').empty();
         //append our html elements to the events location
         $('#events').find('.events-list').append(html);
+        $('.events-list').isotope('destroy');
     }
 
     /**
@@ -135,7 +144,7 @@ var TicketMasterEvent = function() {
         //when the user clicks on a category button - this is the isotope functionality
         $(document).on('click', '.category-button', function() {
             var filter = $(this).attr('data-filter');
-            $('.events-list').isotope('destroy');
+            
             $('.events-list').isotope({
                 filter: filter
             });
@@ -311,7 +320,7 @@ var TicketMasterEventDetails = function() {
         var timezone = event.dates.timezone || 'Data Not Available';
         var name = event.name || 'Data Not Available';
         var images = event.images || 'Data Not Available';
-        var seatMap = event.seatmap.staticUrl || 'Data Not Available';
+        var seatMap = (typeof event.seatmap != 'undefined') ? event.seatmap.staticUrl : 'http://via.placeholder.com/200x200';
         var genreName = event.classifications["0"].genre.name || 'Data Not Available';
         var segmentName = event.classifications["0"].segment.name || 'Data Not Available';
         var date = event.dates.start.localDate || 'Data Not Available';

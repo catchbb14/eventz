@@ -87,6 +87,7 @@ var TicketMasterEvent = function() {
                               <h6>${eventDate}</h6>
                               <button class="btn btn-venue-details">Venue Details</button>
                               <button class="btn btn-event-details">Event Details</button>
+                              <button class="btn btn-save-details">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
                               <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
@@ -119,23 +120,12 @@ var TicketMasterEvent = function() {
      */
     function clickEventHandlers() {
         //on click event for the search form passes event and zipcode to ajax function
-        $(document).on('click', '#search', function() {
+        $(document).on('click', '#search', function(event) {
+            event.preventDefault();
             var event = $('#search-event').val().trim();
             var city = $('#search-city').val().trim();
             var state = $('#search-state').val().trim();
             var zip = $('#search-zipcode').val().trim();
-
-            console.log($('#search-state option:selected')[0]);
-            if($('#search-state').options[0].selected == true) {
-                state = '';
-            }
-
-            if(zip === "" || function(zip) {
-                return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)
-            }) {
-                getEventData(event, city, state, zip);
-            }
-            
 
             clearForm();
 
@@ -146,6 +136,7 @@ var TicketMasterEvent = function() {
                 zip: zip
             });
 
+            getEventData(event, city, state, zip);
         });
 
         // when the user clicks the close tab
@@ -167,8 +158,7 @@ var TicketMasterEvent = function() {
      * clearForm clears the form after the submit button has been searched
      */
     function clearForm() {
-        $('#search-event, #search-city, #search-zipcode').val('');
-        $('#search-state').options[0].selected=true;
+        $('#search-event, #search-city, #search-state, #search-zipcode').val('');
     }
 
     /**

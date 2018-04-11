@@ -88,8 +88,8 @@ var TicketMasterEvent = function() {
                               <h6>${eventName}</h6>
                               <h4>Venue: ${venueName}</h4>
                               <h6>${eventDate}</h6>
-                              <button class="btn btn-venue-details">Venue Details</button>
-                              <button class="btn btn-event-details">Event Details</button>
+                              <button type="button" class="btn btn-venue-details" data-toggle="modal" data-target="#myModal">Venue Details</button>
+                              <button type="button" class="btn btn-event-details" data-toggle="modal" data-target="#myModal">Event Details</button>
                               <button class="btn btn-save-event">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
@@ -167,17 +167,17 @@ var TicketMasterEvent = function() {
             }, 500);
         });
 
-        $(document).on('click', '.btn-venue-details', function() {
-            $('html, body').animate({
-                scrollTop: $(this).parents('.event-item').siblings('.venue').offset().top
-            }, 500);
-        });
+        // $(document).on('click', '.btn-venue-details', function() {
+        //     $('html, body').animate({
+        //         scrollTop: $(this).parents('.event-item').siblings('.venue').offset().top
+        //     }, 500);
+        // });
 
-        $(document).on('click', '.btn-event-details', function() {
-            $('html, body').animate({
-                scrollTop: $(this).parents('.event-item').siblings('.event').offset().top
-            }, 500);
-        });
+        // $(document).on('click', '.btn-event-details', function() {
+        //     $('html, body').animate({
+        //         scrollTop: $(this).parents('.event-item').siblings('.event').offset().top
+        //     }, 500);
+        // });
     }
 
     /**
@@ -251,30 +251,27 @@ var TicketMasterVenueDetails = function() {
         var parkingDetails = venue.parkingDetail || 'Data Not Available';
         var url = venue.url;
         var html = `
-                    <div class="details">
-                        <h4 class="text-center">${name} Venue Details</h4>
-                        <div class="close-tab">close</div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Address</div>
-                            <div>${address}</div>
-                            <div>${city}, ${state} ${zipCode}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center text-left">
-                            <div class="title">Parking</div>
-                            <div class="ellipsis">${parkingDetails}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Links</div>
-                            <div><a href="${url}" target="_blank">${name}</a></div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Box Office Info</div>
-                            <div class="ellipsis">${boxOfficeHours}</div>
-                            <div class="ellipsis">${paymentDetails}</div>
-                        </div>
-                    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">${name} Venue Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="title">Address:</div>
+                <div>${address} ${city}, ${state} ${zipCode}</div>
+                <div class="title">Parking:</div>
+                <div>${parkingDetails}</div>
+                <div class="title">Link:</div>
+                <div><a href="${url}" target="_blank">Link to ${name}</a></div>
+                <div class="title">Box Office Info</div>
+                <div class="">${boxOfficeHours}</div>
+                <div class="">${paymentDetails}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         `;
-        targetDivId.append(html);
+        $('.modal-content').empty();
+        $('.modal-content').append(html);
     }
 
     /**
@@ -284,8 +281,6 @@ var TicketMasterVenueDetails = function() {
         $(document).on('click', '.btn-venue-details', function() {
             var venueId = $(this).parents('.event-item').attr('data-venue-id');
             var theEvent = $(this).parents('.event-item');
-            //empty the div before making another ajax call
-            $(this).parents('.event-item').siblings('.venue').empty();
             getVenueDetailsData(venueId, theEvent);
         });
     }
@@ -365,40 +360,36 @@ var TicketMasterEventDetails = function() {
             timeRemaining += "<div>It's today, hope you're ready!</div>"
         }
         var html = `
-                    <div class="details">
-                        <h4 class="text-center">${name} Event Details</h4>
-                        <div class="close-tab">close</div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Tickets</div>
-                            <div>Currently ${status}</div>
-                            <div>$${minPrice} - $${maxPrice}</div>
-                            <div></div>
-                        </div>
-                        <div class="col-md-3 float-left text-center text-left">
-                            <div class="title">General Info</div>
-                            <div>${genreName}</div>
-                            <div>${segmentName}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Seat Map</div>
-                            <div>
-                                <a href="${seatMap}" data-lightbox="${eventId}" data-title="${name}">
-                                    <img class="seatmap"  src="${seatMap}">
-                                </a>
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Days Until the Event</div>
-                            ${timeRemaining}
-                            <div class="text-center">
-                                The event is on ${moment(date).format('ddd, MMM Do')} at
-                                ${moment(time, 'HH:mm:ss').format("h:mm a")}.
-                            </div>
-                        </div>
-                    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">${name} Event Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="title">Tickets</div>
+                <div>Currently ${status}</div>
+                <div>$${minPrice} - $${maxPrice}</div>
+                <div class="title">General Info</div>
+                <div>${genreName}</div>
+                <div>${segmentName}</div>
+                <div class="title">Seat Map</div>
+                <div>
+                    <a href="${seatMap}" data-lightbox="${eventId}" data-title="${name}">
+                    <img class="seatmap"  src="${seatMap}">
+                </a>
+                </div>
+                <div class="title">Days Until the Event</div>
+                ${timeRemaining}
+                <div class="">
+                    The event is on ${moment(date).format('ddd, MMM Do')} at
+                    ${moment(time, 'HH:mm:ss').format("h:mm a")}.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         `;
-        targetDivId.append(html);
+        $('.modal-content').empty();
+        $('.modal-content').append(html);
     }
 
     /**
@@ -409,8 +400,6 @@ var TicketMasterEventDetails = function() {
         $(document).on('click', '.btn-event-details', function() {
             var eventId = $(this).parents('.event-item').attr('data-event-id');
             var theEvent = $(this).parents('.event-item');
-            //empty the div before making another ajax call
-            $(this).parents('.event-item').siblings('.event').empty();
             getEventDetailsData(eventId, theEvent);    
         });
     }

@@ -87,7 +87,7 @@ var TicketMasterEvent = function() {
                               <h6>${eventDate}</h6>
                               <button class="btn btn-venue-details">Venue Details</button>
                               <button class="btn btn-event-details">Event Details</button>
-                              <button class="btn btn-save-details">Save Event</button>
+                              <button class="btn btn-save-event">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
                               <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>

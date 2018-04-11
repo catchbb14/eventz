@@ -37,11 +37,80 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a id="signin" class="nav-link rounded" href="#signin">Sign In</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign In
+              </a>
+              <div class="dropdown-menu">
+                  <form class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="signinEmail">Email address</label>
+                      <input type="email" class="form-control" id="signinEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="signinPassword">Password</label>
+                      <input type="password" class="form-control" id="signinPassword" placeholder="Password">
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                      <label class="form-check-label" for="dropdownCheck">
+                        Remember me
+                      </label>
+                      <br><br>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Sign up</a>
+                  <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
             </li>
+
             <li class="nav-item">
-              <a id="signup" class="nav-link rounded" href="#signup">Sign Up</a>
+              <a class="nav-link" data-toggle="modal" data-target="#signupModal" href="#signupModal" >Sign Up</a>
+              <div class="modal" id="signupModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">Sign Up!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="user-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="John Doe">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-city" class="col-form-label">City:</label>
+                            <input type="text" class="form-control" id="user-city" placeholder="ex: Boston">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-state" class="col-form-label">State:</label>
+                            <select class="form-control state-list" id="user-state" >
+                              <option selected>Select a State</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="user-email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="user-email" placeholder="email@example.com">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="user-password">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </li>
             <li class="nav-item">
               <a id="logout" class="nav-link rounded" href="#logout">Logout</a>

@@ -270,7 +270,6 @@ var TicketMasterVenueDetails = function() {
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         `;
-        $('.modal-content').empty();
         $('.modal-content').append(html);
     }
 
@@ -281,6 +280,7 @@ var TicketMasterVenueDetails = function() {
         $(document).on('click', '.btn-venue-details', function() {
             var venueId = $(this).parents('.event-item').attr('data-venue-id');
             var theEvent = $(this).parents('.event-item');
+            $('.modal-content').empty();
             getVenueDetailsData(venueId, theEvent);
         });
     }
@@ -388,7 +388,7 @@ var TicketMasterEventDetails = function() {
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         `;
-        $('.modal-content').empty();
+        
         $('.modal-content').append(html);
     }
 
@@ -400,6 +400,7 @@ var TicketMasterEventDetails = function() {
         $(document).on('click', '.btn-event-details', function() {
             var eventId = $(this).parents('.event-item').attr('data-event-id');
             var theEvent = $(this).parents('.event-item');
+            $('.modal-content').empty();
             getEventDetailsData(eventId, theEvent);    
         });
     }

@@ -9,7 +9,7 @@ Eventz is a website that allows a user to search for events based on the event n
     │   ├── images
     │   ├── js
     │   │   ├── database.js          # Holds the configuration to our database
-    │   │   ├── main.js              # Holds the configuration to our database
+    │   │   ├── main.js
     │   │   ├── openweather.js       # OpenWeatherMap module
     │   │   ├── popular-search.js    # Masthead recent/popular search module
     │   │   ├── save-to-favorites.js # Save events to favorites in database module

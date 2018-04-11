@@ -331,3 +331,7 @@ hr {
 .events-list {
   height: 100% !important;
 }
+
+.modal-backdrop {
+  z-index: -1;
+}

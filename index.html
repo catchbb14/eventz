@@ -120,21 +120,29 @@
     <!-- Weather Section -->
     <section class="bg-primary text-white" id="weather">
       <div class="container">
+      
         <h2 class="text-center text-uppercase text-white">Weather for {city}?</h2>
         <hr class="star-light">
-        <div class="row">
-          <div class="col-lg-4 ml-auto">
-            <p class="">Display some weather here?</p>
+        
+        <div id="weatherWidget" class="row">
+          <div class="col-lg-3 ml-auto">
+            <p class="text-center">CURRENT WEATHER</p>
+            <div id="currentWeather"></div>
           </div>
-          <div class="col-lg-4 mr-auto">
-            <p class="">Display some weather here?</p>
+      
+          <div class="col-lg-9 ml-auto">
+            <p>FORECAST</p>
+            <div id="forecastWeather"></div>
           </div>
         </div>
+        
         <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            Load more weather?
+          <a>
+            <input id="newInput" class="form-control" placeholder="Enter Zipcode ..."><br>
+            <button id="newButton" class="btn btn-xl btn-outline-light">Search</button>
           </a>
         </div>
+      
       </div>
     </section>
 

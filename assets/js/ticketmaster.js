@@ -4,7 +4,8 @@
  */
 var TicketMasterEvent = function() {
     
-	var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+    var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+    var isActive = false;
 
     /**
      * getEventData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2)
@@ -111,7 +112,10 @@ var TicketMasterEvent = function() {
         $('#events').find('.events-list').empty();
         //append our html elements to the events location
         $('#events').find('.events-list').append(html);
-        $('.events-list').isotope('destroy');
+        if(isActive) {
+            $('.events-list').isotope('destroy');
+            isActive = false;
+        }
     }
 
     /**
@@ -151,6 +155,8 @@ var TicketMasterEvent = function() {
             $('.events-list').isotope({
                 filter: filter
             });
+
+            isActive = true;
         });
     }
 

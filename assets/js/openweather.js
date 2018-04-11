@@ -56,7 +56,10 @@ $(function(){
 
     //Function to pull information for the current weather and print to html
     function  createCurrentWeatherElements(currentResponse) {
-        
+
+        //Empties html at the currentWeather id location
+        $('#currentWeather').empty();
+
         //Variables for the infromation pulled from the API
         var currentWeatherCity = currentResponse.name || 'Data Not Available';
         var currentWeatherZipcode = zipcode || 'Data Not Available';
@@ -93,21 +96,22 @@ $(function(){
                         <p>${currentWeatherDay} ${currentWeatherDate}</p>
                     </div>
                     <div class="col-8">
-                        <p>${currentWeatherCity} CURRENT WEATHER</p>
+                        <p>${currentWeatherCity}</p>
                     </div>
                 </div>
 
             </div>
             <hr>`;
                 
-        //Empties html at the currentWeather id location
-        $('#currentWeather').empty();
         //Appends new html to the currentWeather id location
         $('#currentWeather').append(html);
     };
 
     //Function to pull information for the forecast weather and print to html
     function  createForecastWeatherElements(forecastResponse) {
+        
+        //Empties html at the currentWeather id location
+        $('#forecastWeather').empty();
         
         for (var i = 0; i < forecastResponse.list.length; i= i+8 ) {
 
@@ -117,12 +121,10 @@ $(function(){
             var forecastWeatherDescription = forecastResponse.list[i].weather[0].description || 'Data Not Available';
             var forecastWeatherIcon = forecastResponse.list[i].weather[0].icon || 'Data Not Available';
             var forecastWeatherGroup= forecastResponse.list[i].weather[0].main || 'Data Not Available'; 
-
         
-
         //Variable for html
         var html = '';
-
+        
         //Defines html to be appended
             html += `
                 <div class="container text-center">
@@ -156,8 +158,6 @@ $(function(){
                 </div>
                 <hr>`;
 
-        //Empties html at the currentWeather id location
-        //$('#forecastWeather').empty();
         //Append html to the currentWeather id location
         $('#forecastWeather').append(html);
 

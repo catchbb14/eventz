@@ -87,6 +87,7 @@ var TicketMasterEvent = function() {
                               <h6>${eventDate}</h6>
                               <button class="btn btn-venue-details">Venue Details</button>
                               <button class="btn btn-event-details">Event Details</button>
+                              <button class="btn btn-save-details">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
                               <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
@@ -119,7 +120,8 @@ var TicketMasterEvent = function() {
      */
     function clickEventHandlers() {
         //on click event for the search form passes event and zipcode to ajax function
-        $(document).on('click', '#search', function() {
+        $(document).on('click', '#search', function(event) {
+            event.preventDefault();
             var event = $('#search-event').val().trim();
             var city = $('#search-city').val().trim();
             var state = $('#search-state').val().trim();

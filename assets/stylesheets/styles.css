@@ -257,7 +257,7 @@ button.bg-primary:hover, button.bg-primary:focus {
 }
 
 .event-item img {
-  border: 5px solid;
+  border: 5px solid #450F5D;
   border-radius: 10px;
   width: 100%;
 }

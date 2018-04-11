@@ -80,7 +80,9 @@ var TicketMasterEvent = function() {
                         <div class="event-item-isotope row ${isotopes}" id="${eventId}">
                           <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
                             <div class="col-md-3 float-left">
-                              <img src="${eventImage}">
+                                <a href="${eventImage}" data-lightbox="${eventImage}" data-title="${eventName}">
+                                    <img class="seatmap"  src="${eventImage}">
+                                </a>
                             </div>
                             <div class="col-md-6 float-left text-left">
                               <h6>${eventName}</h6>
@@ -88,7 +90,7 @@ var TicketMasterEvent = function() {
                               <h6>${eventDate}</h6>
                               <button class="btn btn-venue-details">Venue Details</button>
                               <button class="btn btn-event-details">Event Details</button>
-                              <button class="btn btn-save-details">Save Event</button>
+                              <button class="btn btn-save-event">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
                               <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
@@ -157,6 +159,24 @@ var TicketMasterEvent = function() {
             });
 
             isActive = true;
+        });
+
+        $(document).on('click', '#search', function() {
+            $('html, body').animate({
+                scrollTop: $("#events").offset().top
+            }, 500);
+        });
+
+        $(document).on('click', '.btn-venue-details', function() {
+            $('html, body').animate({
+                scrollTop: $(this).parents('.event-item').siblings('.venue').offset().top
+            }, 500);
+        });
+
+        $(document).on('click', '.btn-event-details', function() {
+            $('html, body').animate({
+                scrollTop: $(this).parents('.event-item').siblings('.event').offset().top
+            }, 500);
         });
     }
 

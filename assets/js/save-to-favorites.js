@@ -6,13 +6,14 @@ var FavoritesSection = function() {
 	 * whenUserSavesEvent Gets the data from the event and pushes it to firebase
 	 */
 	function whenUserSavesEvent() {
-		var eventName = $(.event-item).attr('data-event-id');
+		// var eventName = $(.event-item).attr('data-event-id');
+		// var eventDate = data-date
+		// var eventImage = .event-item img src
 
 	  database.ref("saved/").push({
 	      event: event,
-	      city: city,
-	      state: state,
-	      zip: zip
+	      date: city,
+	      img: state
 	  });
 	}
 

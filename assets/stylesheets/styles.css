@@ -235,6 +235,7 @@ button.bg-primary:hover, button.bg-primary:focus {
 .searches {
   border: 3px solid #9b359a;
   margin: 5px;
+  width:auto !important;
 }
 
 .btn-venue-details:hover, .btn-event-details:hover, .get-weather:hover, .searches:hover, .category-button:hover, .btn-save-event:hover {

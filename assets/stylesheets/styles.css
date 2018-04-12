@@ -417,3 +417,18 @@ hr {
 .ui-autocomplete.source:hover {
   background: #454545;
 }
+
+.weatherWidget {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 25px;
+  border: 3px solid #9b359a;
+  background-color: #D0D0D0;
+  color: #212529;
+}
+
+#forecastWidgets {
+  margin: 1%;
+  
+}
+

@@ -2,31 +2,54 @@ console.log('openweather.js')
 
 $(function(){
  
-    
-    //Global variable for the API key that's being used, https://openweathermap.org/
+    //Global variable for weather icons
+    var weatherIcons = {
+        '01d': 'wi-day-sunny',
+        '02d': 'wi-day-cloudy',
+        '03d': 'wi-cloud',
+        '04d': 'wi-cloudy',
+        '09d': 'wi-day-showers',
+        '10d': 'wi-day-rain',
+        '11d': 'wi-day-thunderstorm',
+        '13d': 'wi-day-snow',
+        '50d': 'wi-day-fog',
+        '01n': 'wi-night-clear',
+        '02n': 'wi-night-cloudy',
+        '03n': 'wi-cloud',
+        '04n': 'wi-cloudy',
+        '09n': 'wi-night-alt-showers',
+        '10n': 'wi-night-alt-rain',
+        '11n': 'wi-night-alt-thunderstorm',
+        '13n': 'wi-night-alt-snow',
+        '50n': 'wi-night-fog'
+    };
+
+    //Global variable for the API key, taken from https://openweathermap.org/
     var APIKey = '3bce2d04045dd38cbdadc38a931790ac';
     
-    //Global variable for the searched zipcode
-    var zipcode;
+    //Global variables for the searched zip code and city
+    var zipcodeWeather;
+    var cityWeather;
     
-    
-    //On-click function to pull zipcode from the search input and search API for information
-    $('#newButton').click(function (){
+    //On-click function to pull zip code and city from the search input and search API for information
+    $('#searchWeather').click(function (){
      
-        zipcode = $('#newInput').val();
-        $('#newInput').val('');
+        zipcodeWeather = $('#zipcodeWeather').val();
+        $('#zipcodeWeather').val('');
 
+        cityWeather = $('#cityWeather').val();
+        $('#cityWeather').val('');
         searchOpenWeatherAPI ();
     
     });
     
     
-    //Function to search API based on the zipcode and return information
+    //Function to search API based on the zip code and return information
     function searchOpenWeatherAPI () {
               
         //Variables to for URLs that use the API keys, there's one for daily weather and another for five day forecast for every three hours
-        var queryURLforecast = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zipcode + '&appid=' + APIKey; 
-        var queryURLweather = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zipcode + '&appid=' + APIKey;     
+        var queryURLforecast = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey; 
+        var queryURLweather = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey;     
 
         $.ajax({
             type: "GET",
@@ -52,124 +75,130 @@ $(function(){
         });
            
     }; 
-    
 
     //Function to pull information for the current weather and print to html
     function  createCurrentWeatherElements(currentResponse) {
 
         //Empties html at the currentWeather id location
-        $('#currentWeather').empty();
+        $('#current').empty();
 
         //Variables for the infromation pulled from the API
         var currentWeatherCity = currentResponse.name || 'Data Not Available';
-        var currentWeatherZipcode = zipcode || 'Data Not Available';
-        var currentWeatherDay = moment.unix(currentResponse.dt).format("ddd") || 'Data Not Available';
-        var currentWeatherDate = moment.unix(currentResponse.dt).format("MM/DD") || 'Data Not Available';
-        var currentWeatherTemp = Math.round(currentResponse.main.temp - 273.15)  || 'Data Not Available';
+        var currentWeatherZipcode = zipcodeWeather || 'Data Not Available';
+        var currentWeatherDay = moment.unix(currentResponse.dt).format("dddd") || 'Data Not Available';
+        var currentWeatherDate = moment.unix(currentResponse.dt).format("MM/DD/YY") || 'Data Not Available';
+        var currentWeatherTime = moment.unix(currentResponse.dt).format('LT') || 'Data Not Available';
+        var currentWeatherTempHigh = Math.round(currentResponse.main.temp_max - 273.15)  || 'Data Not Available';
+        var currentWeatherTempLow = Math.round(currentResponse.main.temp_min - 273.15)  || 'Data Not Available';
         var currentWeatherDescription = currentResponse.weather[0].description || 'Data Not Available';
-        var currentWeatherIcon = currentResponse.weather[0].icon || 'Data Not Available';
-        var currentWeatherGroup = currentResponse.weather[0].main || 'Data Not Available';
+        var currentWeatherIcon = weatherIcons[currentResponse.weather[0].icon] || 'Data Not Available';
+
+        $('#citeName').append('currentWeatherCity');
 
         //Variable for html
         var html = '';
 
         //Defines html to be appended
         html += `
-            <div class="container text-center">
-                <div id="icon" class="row">
-                    <div class="col-12">
-                        <p>${currentWeatherIcon}</p>
-                    </div>
-                </div>
-                
-                <div id="weatherInfo" class="row">
-                    <div class="col-4">
-                        <p>${currentWeatherTemp} &deg;C</p>
-                    </div>
-                    <div class="col-8">
-                        <p>${currentWeatherDescription}</p>
-                    </div>
-                </div>
+            <h4 class="text-center text-uppercase">${currentWeatherCity}  ${currentWeatherTime}</h4>
+            <hr>
 
-                <div id="searchInfo" class="row">
-                    <div class="col-4">
-                        <p>${currentWeatherDay} ${currentWeatherDate}</p>
+            <div class="weatherWidget text-center text-uppercase">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Today ${currentWeatherDate}<h5>
+                        </div>
                     </div>
-                    <div class="col-8">
-                        <p>${currentWeatherCity}</p>
+
+                    <div class="row">
+                        <div class="col">
+                            <span style="font-size:60px"><i class="wi ${currentWeatherIcon}"></i></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <h5>${currentWeatherTempHigh} &deg;C / ${currentWeatherTempLow} &deg;C</h5>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <h5>${currentWeatherDescription}</h5>
+                        </div>
                     </div>
                 </div>
-
-            </div>
-            <hr>`;
+            </div>`;
                 
         //Appends new html to the currentWeather id location
-        $('#currentWeather').append(html);
+        $('#current').append(html);
     };
 
     //Function to pull information for the forecast weather and print to html
     function  createForecastWeatherElements(forecastResponse) {
         
-        //Empties html at the currentWeather id location
-        $('#forecastWeather').empty();
-        
-        for (var i = 0; i < forecastResponse.list.length; i= i+8 ) {
+        $('#forecastTitle').html('<h4 class="text-uppercase">General Forecast</h4><hr>');
 
-            var forecastWeatherDay = moment.unix(forecastResponse.list[i].dt).format("ddd") || 'Data Not Available';
+        //Empties html at the currentWeather id location
+        $('#forecastWidgets').empty();
+       
+        
+        for (var i = 8; i < forecastResponse.list.length; i= i+8) {
+
+            var forecastWeatherDay = moment.unix(forecastResponse.list[i].dt).format("dddd") || 'Data Not Available';
             var forecastWeatherTempHigh = Math.round(forecastResponse.list[i].main.temp_max - 273.15)  || 'Data Not Available';
             var forecastWeatherTempLow = Math.round(forecastResponse.list[i].main.temp_min - 273.15)  || 'Data Not Available';
             var forecastWeatherDescription = forecastResponse.list[i].weather[0].description || 'Data Not Available';
-            var forecastWeatherIcon = forecastResponse.list[i].weather[0].icon || 'Data Not Available';
-            var forecastWeatherGroup= forecastResponse.list[i].weather[0].main || 'Data Not Available'; 
+            var forecastWeatherIcon = weatherIcons[forecastResponse.list[i].weather[0].icon] || 'Data Not Available';
+            var forecastWeatherTime = moment.unix(forecastResponse.list[i].dt).format('LT') || 'Data Not Available';
         
-        //Variable for html
+        //Variable for title and html
         var html = '';
-        
+
         //Defines html to be appended
             html += `
-                <div class="container text-center">
-                <div class="row">
-                    <div id="day" class="col">
-                        <div class="col-12">
-                            <p>${forecastWeatherDay}</p>
+               <div class="weatherWidget text-center text-uppercase">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>${forecastWeatherDay}  ${forecastWeatherTime}</h6>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    
-                    <div id="icon" class="col">
-                        <div class="col-12">
-                            <p>${forecastWeatherIcon}</p>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <span style="font-size:50px"><i class="wi ${forecastWeatherIcon}"></i></span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div id="HighLow" class="col">
-                        <div class="col-12">
-                            <p>${forecastWeatherTempHigh} &deg;C / ${forecastWeatherTempLow} &deg;C</p>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>${forecastWeatherTempHigh} &deg;C / ${forecastWeatherTempLow} &deg;C</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>${forecastWeatherDescription}</h6>
+                            </div>
                         </div>
                     </div>
-
-                    <div id="Description" class="col">
-                        <div class="col-12">
-                            <p>${forecastWeatherDescription}</p>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <hr>`;
+                </div>`;
 
         //Append html to the currentWeather id location
-        $('#forecastWeather').append(html);
-
+        $('#forecastWidgets').append(html);
         };
+
+        $('#forecastWidgets').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+
     };
 
-    //Should this look up by both city and zipcode? 
-    //Should this automatically populate by zipcode from the search abover? 
-    //Shoudl I just pull this form Eric's API?
-    //need to figure out the icons from the current assets file,
-    //need to have place holder for icons that arent' listed (if/else)
-    //need to upload code to github -- need to ask Jason how to do this
-    //
+ 
 
 });    
+

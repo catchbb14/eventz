@@ -235,7 +235,7 @@ button.bg-primary:hover, button.bg-primary:focus {
 .searches {
   border: 3px solid #9b359a;
   margin: 5px;
-  width:auto !important;
+  /*width:auto !important;*/
 }
 
 .btn-venue-details:hover, .btn-event-details:hover, .get-weather:hover, .searches:hover, .category-button:hover, .btn-save-event:hover {
@@ -392,3 +392,29 @@ hr {
 }
 
 /*END CSS FOR SEARCH FORM*/
+.validation {
+  position: absolute;
+  top: 6px;
+  right: 25px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.ui-autocomplete {
+  background: #450F5D;
+  color: #fff;
+  list-style: none;
+  width: 100px;
+  border: 3px solid #fff;
+  border-radius: 0px;
+  margin-left: 0px;
+}
+.ui-autocomplete.source:hover {
+  background: #454545;
+}

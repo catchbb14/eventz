@@ -128,21 +128,31 @@ var TicketMasterEvent = function() {
         //on click event for the search form passes event and zipcode to ajax function
         $(document).on('click', '#search', function(event) {
             event.preventDefault();
-            var event = $('#search-event').val().trim();
-            var city = $('#search-city').val().trim();
-            var state = $('#search-state').val().trim();
-            var zip = $('#search-zipcode').val().trim();
+            var errorLength = $('.error').length;
+            //if there is an error in the search form, add a message to the page.
+            if(errorLength) {
+                $('.navbar-form .search-form').append('<div class="submit-error">Fix your errors to search!</div>');
+            }else {
+                $('html, body').animate({
+                    scrollTop: $("#events").offset().top
+                }, 500);
+                var event = $('#search-event').val().trim();
+                var city = $('#search-city').val().trim();
+                var state = $('#search-state').val().trim();
+                var zip = $('#search-zipcode').val().trim();
 
-            clearForm();
+                clearForm();
 
-            database.ref("search/").push({
-                event: event,
-                city: city,
-                state: state,
-                zip: zip
-            });
+                database.ref("search/").push({
+                    event: event,
+                    city: city,
+                    state: state,
+                    zip: zip
+                });
 
-            getEventData(event, city, state, zip);
+                getEventData(event, city, state, zip);                
+            }
+
         });
 
         // when the user clicks the close tab
@@ -160,24 +170,6 @@ var TicketMasterEvent = function() {
 
             isActive = true;
         });
-
-        $(document).on('click', '#search', function() {
-            $('html, body').animate({
-                scrollTop: $("#events").offset().top
-            }, 500);
-        });
-
-        // $(document).on('click', '.btn-venue-details', function() {
-        //     $('html, body').animate({
-        //         scrollTop: $(this).parents('.event-item').siblings('.venue').offset().top
-        //     }, 500);
-        // });
-
-        // $(document).on('click', '.btn-event-details', function() {
-        //     $('html, body').animate({
-        //         scrollTop: $(this).parents('.event-item').siblings('.event').offset().top
-        //     }, 500);
-        // });
     }
 
     /**
@@ -185,6 +177,7 @@ var TicketMasterEvent = function() {
      */
     function clearForm() {
         $('#search-event, #search-city, #search-state, #search-zipcode').val('');
+        $('.validation').remove();
     }
 
     /**

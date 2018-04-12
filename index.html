@@ -199,36 +199,34 @@
     </section>
 
     <!-- Weather Section -->
-    <section id="weather" class="bg-primary text-white">
+    <section class="bg-primary text-white" id="weather">
       <div class="container">
       
-        <h2 class="text-center text-uppercase text-white">Search Weather for {City}</h2>
+        <h2 class="text-center text-uppercase text-white">Weather for {city}?</h2>
         <hr class="star-light">
         
         <div id="weatherWidget" class="row">
-
-          <div id="current" class="col-lg-3 ml-auto">
-            <div id="currentTitle"></div>
-            <div id="currentWidget" class="row text-center"></div>
+          <div class="col-lg-3 ml-auto">
+            <h4 class="text-center">CURRENT</h4>
+            <div id="currentWeather"></div>
           </div>
       
-          <div id="forecast" class="col-lg-9 ml-auto">
-            <div id="forecastTitle"></div>
-              <div id="forecastWidgets" class="row text-center">
-              </div>
-            </div>
+          <div class="col-lg-9 ml-auto">
+            <h4>FORECAST</h4>
+            <div id="forecastWeather"></div>
           </div>
         </div>
-        <br>
+        
 
-      <div class="container">
-        <div class="form-group search-form">
-          <h6 class="text-left">Search Weather</h6>
-          <input id="cityWeather" type="text" class="form-control" placeholder="City">
-          <input id="zipcodeWeather" type="text" class="form-control" placeholder="Zip Code">
+        <div id="weather-search"class="text-center mt-4">
+          <div id="search-weater" class="form-group search-form">
+            <h6 class="text-left">Search Weather</h6>
+            <input id="search-city" type="text" class="form-control" placeholder="City">
+            <input id="newInput" type="text" class="form-control" placeholder="Zip Code">
+          </div>
+          <button id="newButton" type="submit" class="btn btn-search-submit float-left">Search</button>
         </div>
-        <button id="searchWeather" type="submit" class="btn btn-search-submit float-left">Search</button>
-      </div>
+
 
       </div>
     </section>

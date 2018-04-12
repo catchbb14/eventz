@@ -61,7 +61,7 @@
                     <button type="submit" class="btn btn-primary">Sign in</button>
                   </form>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Sign up</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#signupModal" href="#signupModal">Sign up</a>
                   <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
             </li>
@@ -78,34 +78,30 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <form>
-                          <div class="form-group">
-                            <label for="user-name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" id="user-name" placeholder="John Doe">
-                          </div>
-                          <div class="form-group">
-                            <label for="user-city" class="col-form-label">City:</label>
-                            <input type="text" class="form-control" id="user-city" placeholder="ex: Boston">
-                          </div>
-                          <div class="form-group">
-                            <label for="user-state" class="col-form-label">State:</label>
-                            <select class="form-control state-list" id="user-state" >
-                              <option selected>Select a State</option>
-                            </select>
-                          </div>
+                        <form id="sign-up-form">
                           <div class="form-group">
                             <label for="user-email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" id="user-email" placeholder="email@example.com">
+                            <input type="email" class="form-control" id="user-email" placeholder="email@example.com" required>
                           </div>
                           <div class="form-group">
                             <label for="user-password" class="col-form-label">Password:</label>
-                            <input type="password" class="form-control" id="user-password">
+                            <input type="password" class="form-control" id="user-password" required>
                           </div>
+                          <div class="form-group">
+                            <label for="user-city" class="col-form-label">City:</label>
+                            <input type="text" class="form-control" id="user-city" placeholder="ex: Boston" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="user-state" class="col-form-label">State:</label>
+                            <select class="form-control state-list" id="user-state" required>
+                              <option value="">Select a State</option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary" id="submitNewUser">Sign Up!</button> 
                         </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
                       </div>
                     </div>
                   </div>
@@ -317,6 +313,7 @@
     <script src="assets/js/weatherbit.js"></script>
     <script src="assets/js/openweather.js"></script>
     <script src="assets/js/save-to-favorites.js"></script>
+    <script src="assets/js/user.js"></script>
   </body>
 
 </html>

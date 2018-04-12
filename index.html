@@ -37,11 +37,80 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a id="signin" class="nav-link rounded" href="#signin">Sign In</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign In
+              </a>
+              <div class="dropdown-menu">
+                  <form class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="signinEmail">Email address</label>
+                      <input type="email" class="form-control" id="signinEmail" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                      <label for="signinPassword">Password</label>
+                      <input type="password" class="form-control" id="signinPassword" placeholder="Password">
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                      <label class="form-check-label" for="dropdownCheck">
+                        Remember me
+                      </label>
+                      <br><br>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Sign up</a>
+                  <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
             </li>
+
             <li class="nav-item">
-              <a id="signup" class="nav-link rounded" href="#signup">Sign Up</a>
+              <a class="nav-link" data-toggle="modal" data-target="#signupModal" href="#signupModal" >Sign Up</a>
+              <div class="modal" id="signupModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">Sign Up!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="user-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="John Doe">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-city" class="col-form-label">City:</label>
+                            <input type="text" class="form-control" id="user-city" placeholder="ex: Boston">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-state" class="col-form-label">State:</label>
+                            <select class="form-control state-list" id="user-state" >
+                              <option selected>Select a State</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="user-email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" id="user-email" placeholder="email@example.com">
+                          </div>
+                          <div class="form-group">
+                            <label for="user-password" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="user-password">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </li>
             <li class="nav-item">
               <a id="logout" class="nav-link rounded" href="#logout">Logout</a>
@@ -59,10 +128,22 @@
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group search-form">
               <h6 class="text-left">Search Eventz</h6>
-              <input id="search-event" type="text" class="form-control" placeholder="Eventz">
-              <input id="search-city" type="text" class="form-control" placeholder="City">
-              <input id="search-state" type="text" class="form-control" placeholder="State">
-              <input id="search-zipcode" type="text" class="form-control" placeholder="Zip Code">
+              <div class="col-12">
+                <input id="search-event" class="effect-1" type="text" placeholder="Eventz">
+                <span class="focus-border"></span>
+              </div>
+              <div class="col-12">
+                <input id="search-city" class="effect-1" type="text" placeholder="City">
+                <span class="focus-border"></span>
+              </div>
+              <div class="col-12">
+                <input id="search-state" class="effect-1" type="text" placeholder="State">
+                <span class="focus-border"></span>
+              </div>
+              <div class="col-12">
+                <input id="search-zipcode" class="effect-1" maxlength="5" type="text" placeholder="Zip Code">
+                <span class="focus-border"></span>
+              </div>
             </div>
             <button id="search" type="submit" class="btn btn-search-submit float-left">Search</button>
           </form>
@@ -194,6 +275,19 @@
       </div>
     </footer>
 
+    <!-- Modal -->
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div id="event-modal" class="modal-content">
+
+          </div>
+        </div>
+      </div>
+    </div> <!-- end modal -->
+
     <div class="copyright py-4 text-center text-white">
       <div class="container">
         <small>Listin' eventz since 2018.</small>
@@ -208,6 +302,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.js"></script>
     <!-- include jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- include jquery ui -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- include bootstrap js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- include lightbox js -->
@@ -225,6 +321,7 @@
     <script src="assets/js/weatherbit.js"></script>
     <script src="assets/js/openweather.js"></script>
     <script src="assets/js/save-to-favorites.js"></script>
+    <script src="assets/js/search-validation.js"></script>
   </body>
 
 </html>

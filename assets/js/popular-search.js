@@ -4,7 +4,6 @@
  * and themost popular searches that are logged in our firebase database.
  */
 var PopularSearch = function() {
-    // console.log('popular search');
     //this reads from the database every time a value in /search is modified/added/removed. We were having issues with this for re-initializing the slick.js carousel. So we choose to read once per page load.
     // database.ref('/search').on('value', function(snapshot) {
     //     $('#recent-event-searches').empty();
@@ -59,7 +58,8 @@ var PopularSearch = function() {
                 slidesToShow: 5,
                 slidesToScroll: 2,
                 autoplay: true,
-                autoplaySpeed: 2000,
+                autoplaySpeed: 5000,
+                variableWidth: true,
                 responsive: [
                     {
                       breakpoint: 768,
@@ -116,7 +116,8 @@ var PopularSearch = function() {
                     slidesToShow: 5,
                     slidesToScroll: 2,
                     autoplay: true,
-                    autoplaySpeed: 2000,
+                    autoplaySpeed: 5000,
+                    variableWidth: true,
                     responsive: [
                         {
                           breakpoint: 768,

@@ -257,7 +257,7 @@ button.bg-primary:hover, button.bg-primary:focus {
 }
 
 .event-item img {
-  border: 5px solid;
+  border: 5px solid #450F5D;
   border-radius: 10px;
   width: 100%;
 }
@@ -332,6 +332,7 @@ hr {
   height: 100% !important;
 }
 
+
 .weatherWidget {
   padding: 5px;
   margin: 5px;
@@ -343,4 +344,90 @@ hr {
 
 #forecastWidgets {
   margin: 1%;
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+/*CSS FOR SEARCH FORM*/
+.navbar-form .search-form {
+  height: 260px;
+}
+:focus {
+  outline: none;
+}
+
+.col-12 {
+  float: left;
+  width: 100%;
+  left: -8px;
+  margin: 10px;
+  position: relative;
+  margin-bottom: -10px;
+}
+
+/* necessary to give position: relative to parent. */
+
+.navbar-form .search-form input[type="text"] {
+  color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 1px solid;
+}
+.navbar-form .search-form input::placeholder {
+    color: #DCDCDC;
+    opacity: 1; /* Firefox */
+}
+
+.effect-1 {
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.effect-1~.focus-border {
+  position: absolute;
+  bottom: 17px;
+  left: 20px;
+  width: 0;
+  height: 2px;
+  background-color: #450F5D;
+  transition: 0.4s;
+}
+
+.effect-1:focus~.focus-border {
+  width: 80%;
+  transition: 0.4s;
+}
+
+/*END CSS FOR SEARCH FORM*/
+.validation {
+  position: absolute;
+  top: 6px;
+  right: 25px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.ui-autocomplete {
+  background: #450F5D;
+  color: #fff;
+  list-style: none;
+  width: 100px;
+  border: 3px solid #fff;
+  border-radius: 0px;
+  margin-left: 0px;
+}
+.ui-autocomplete.source:hover {
+  background: #454545;
+
 }

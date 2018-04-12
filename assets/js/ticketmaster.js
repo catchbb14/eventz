@@ -4,7 +4,8 @@
  */
 var TicketMasterEvent = function() {
     
-	var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+    var apikey = 'tYAxcgGsO5m5yQe4PMj9GTsqYjcAVMwy';
+    var isActive = false;
 
     /**
      * getEventData is an ajax request to ticketmasters Event Search api (https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2)
@@ -79,15 +80,17 @@ var TicketMasterEvent = function() {
                         <div class="event-item-isotope row ${isotopes}" id="${eventId}">
                           <div class="col-md-12 event-item" data-venue-id="${venueId}" data-event-id="${eventId}" data-zip="${zip}" data-date="${eventDate}">
                             <div class="col-md-3 float-left">
-                              <img src="${eventImage}">
+                                <a href="${eventImage}" data-lightbox="${eventImage}" data-title="${eventName}">
+                                    <img class="seatmap"  src="${eventImage}">
+                                </a>
                             </div>
                             <div class="col-md-6 float-left text-left">
                               <h6>${eventName}</h6>
                               <h4>Venue: ${venueName}</h4>
                               <h6>${eventDate}</h6>
-                              <button class="btn btn-venue-details">Venue Details</button>
-                              <button class="btn btn-event-details">Event Details</button>
-                              <button class="btn btn-save-details">Save Event</button>
+                              <button type="button" class="btn btn-venue-details" data-toggle="modal" data-target="#myModal">Venue Details</button>
+                              <button type="button" class="btn btn-event-details" data-toggle="modal" data-target="#myModal">Event Details</button>
+                              <button class="btn btn-save-event">Save Event</button>
                             </div>
                             <div class="col-md-3 float-left text-center weather-widget">
                               <span style="font-size:50px;"><i class="wi wi-horizon-alt"></i></span><br>
@@ -111,7 +114,10 @@ var TicketMasterEvent = function() {
         $('#events').find('.events-list').empty();
         //append our html elements to the events location
         $('#events').find('.events-list').append(html);
-        $('.events-list').isotope('destroy');
+        if(isActive) {
+            $('.events-list').isotope('destroy');
+            isActive = false;
+        }
     }
 
     /**
@@ -122,21 +128,31 @@ var TicketMasterEvent = function() {
         //on click event for the search form passes event and zipcode to ajax function
         $(document).on('click', '#search', function(event) {
             event.preventDefault();
-            var event = $('#search-event').val().trim();
-            var city = $('#search-city').val().trim();
-            var state = $('#search-state').val().trim();
-            var zip = $('#search-zipcode').val().trim();
+            var errorLength = $('.error').length;
+            //if there is an error in the search form, add a message to the page.
+            if(errorLength) {
+                $('.navbar-form .search-form').append('<div class="submit-error">Fix your errors to search!</div>');
+            }else {
+                $('html, body').animate({
+                    scrollTop: $("#events").offset().top
+                }, 500);
+                var event = $('#search-event').val().trim();
+                var city = $('#search-city').val().trim();
+                var state = $('#search-state').val().trim();
+                var zip = $('#search-zipcode').val().trim();
 
-            clearForm();
+                clearForm();
 
-            database.ref("search/").push({
-                event: event,
-                city: city,
-                state: state,
-                zip: zip
-            });
+                database.ref("search/").push({
+                    event: event,
+                    city: city,
+                    state: state,
+                    zip: zip
+                });
 
-            getEventData(event, city, state, zip);
+                getEventData(event, city, state, zip);                
+            }
+
         });
 
         // when the user clicks the close tab
@@ -151,6 +167,8 @@ var TicketMasterEvent = function() {
             $('.events-list').isotope({
                 filter: filter
             });
+
+            isActive = true;
         });
     }
 
@@ -159,6 +177,7 @@ var TicketMasterEvent = function() {
      */
     function clearForm() {
         $('#search-event, #search-city, #search-state, #search-zipcode').val('');
+        $('.validation').remove();
     }
 
     /**
@@ -225,30 +244,26 @@ var TicketMasterVenueDetails = function() {
         var parkingDetails = venue.parkingDetail || 'Data Not Available';
         var url = venue.url;
         var html = `
-                    <div class="details">
-                        <h4 class="text-center">${name} Venue Details</h4>
-                        <div class="close-tab">close</div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Address</div>
-                            <div>${address}</div>
-                            <div>${city}, ${state} ${zipCode}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center text-left">
-                            <div class="title">Parking</div>
-                            <div class="ellipsis">${parkingDetails}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Links</div>
-                            <div><a href="${url}" target="_blank">${name}</a></div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Box Office Info</div>
-                            <div class="ellipsis">${boxOfficeHours}</div>
-                            <div class="ellipsis">${paymentDetails}</div>
-                        </div>
-                    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">${name} Venue Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="title">Address:</div>
+                <div>${address} ${city}, ${state} ${zipCode}</div>
+                <div class="title">Parking:</div>
+                <div>${parkingDetails}</div>
+                <div class="title">Link:</div>
+                <div><a href="${url}" target="_blank">Link to ${name}</a></div>
+                <div class="title">Box Office Info</div>
+                <div class="">${boxOfficeHours}</div>
+                <div class="">${paymentDetails}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         `;
-        targetDivId.append(html);
+        $('#event-modal').append(html);
     }
 
     /**
@@ -258,8 +273,7 @@ var TicketMasterVenueDetails = function() {
         $(document).on('click', '.btn-venue-details', function() {
             var venueId = $(this).parents('.event-item').attr('data-venue-id');
             var theEvent = $(this).parents('.event-item');
-            //empty the div before making another ajax call
-            $(this).parents('.event-item').siblings('.venue').empty();
+            $('#event-modal').empty();
             getVenueDetailsData(venueId, theEvent);
         });
     }
@@ -339,40 +353,36 @@ var TicketMasterEventDetails = function() {
             timeRemaining += "<div>It's today, hope you're ready!</div>"
         }
         var html = `
-                    <div class="details">
-                        <h4 class="text-center">${name} Event Details</h4>
-                        <div class="close-tab">close</div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Tickets</div>
-                            <div>Currently ${status}</div>
-                            <div>$${minPrice} - $${maxPrice}</div>
-                            <div></div>
-                        </div>
-                        <div class="col-md-3 float-left text-center text-left">
-                            <div class="title">General Info</div>
-                            <div>${genreName}</div>
-                            <div>${segmentName}</div>
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Seat Map</div>
-                            <div>
-                                <a href="${seatMap}" data-lightbox="${eventId}" data-title="${name}">
-                                    <img class="seatmap"  src="${seatMap}">
-                                </a>
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-3 float-left text-center">
-                            <div class="title">Days Until the Event</div>
-                            ${timeRemaining}
-                            <div class="text-center">
-                                The event is on ${moment(date).format('ddd, MMM Do')} at
-                                ${moment(time, 'HH:mm:ss').format("h:mm a")}.
-                            </div>
-                        </div>
-                    </div>
+            <div class="modal-header">
+                <h4 class="modal-title">${name} Event Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="title">Tickets</div>
+                <div>Currently ${status}</div>
+                <div>$${minPrice} - $${maxPrice}</div>
+                <div class="title">General Info</div>
+                <div>${genreName}</div>
+                <div>${segmentName}</div>
+                <div class="title">Seat Map</div>
+                <div>
+                    <a href="${seatMap}" data-lightbox="${eventId}" data-title="${name}">
+                    <img class="seatmap"  src="${seatMap}">
+                </a>
+                </div>
+                <div class="title">Days Until the Event</div>
+                ${timeRemaining}
+                <div class="">
+                    The event is on ${moment(date).format('ddd, MMM Do')} at
+                    ${moment(time, 'HH:mm:ss').format("h:mm a")}.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         `;
-        targetDivId.append(html);
+        
+        $('#event-modal').append(html);
     }
 
     /**
@@ -383,8 +393,7 @@ var TicketMasterEventDetails = function() {
         $(document).on('click', '.btn-event-details', function() {
             var eventId = $(this).parents('.event-item').attr('data-event-id');
             var theEvent = $(this).parents('.event-item');
-            //empty the div before making another ajax call
-            $(this).parents('.event-item').siblings('.event').empty();
+            $('#event-modal').empty();
             getEventDetailsData(eventId, theEvent);    
         });
     }

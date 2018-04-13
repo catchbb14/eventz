@@ -81,33 +81,34 @@ $(function(){
 
         //Empties html at the currentWeather id location
         $('#current').empty();
+        $('#cityName').empty();
 
         //Variables for the infromation pulled from the API
-        var currentWeatherCity = currentResponse.name || 'Data Not Available';
-        var currentWeatherZipcode = zipcodeWeather || 'Data Not Available';
-        var currentWeatherDay = moment.unix(currentResponse.dt).format("dddd") || 'Data Not Available';
-        var currentWeatherDate = moment.unix(currentResponse.dt).format("MM/DD/YY") || 'Data Not Available';
-        var currentWeatherTime = moment.unix(currentResponse.dt).format('LT') || 'Data Not Available';
-        var currentWeatherTempHigh = Math.round(currentResponse.main.temp_max - 273.15)  || 'Data Not Available';
-        var currentWeatherTempLow = Math.round(currentResponse.main.temp_min - 273.15)  || 'Data Not Available';
-        var currentWeatherDescription = currentResponse.weather[0].description || 'Data Not Available';
-        var currentWeatherIcon = weatherIcons[currentResponse.weather[0].icon] || 'Data Not Available';
+        var currentWeatherCity = currentResponse.name || 'N/A';
+        var currentWeatherZipcode = zipcodeWeather || 'N/A';
+        var currentWeatherDay = moment.unix(currentResponse.dt).format("dddd") || 'N/A';
+        var currentWeatherDate = moment.unix(currentResponse.dt).format("MM/DD/YY") || 'N/A';
+        var currentWeatherTime = moment.unix(currentResponse.dt).format('LT') || 'N/A';
+        var currentWeatherTempHigh = Math.round(currentResponse.main.temp_max - 273.15)  || 'N/A';
+        var currentWeatherTempLow = Math.round(currentResponse.main.temp_min - 273.15)  || 'N/A';
+        var currentWeatherDescription = currentResponse.weather[0].description || 'N/A';
+        var currentWeatherIcon = weatherIcons[currentResponse.weather[0].icon] || 'N/A';
 
-        $('#citeName').append('currentWeatherCity');
+        $('#cityName').append(currentWeatherCity);
 
         //Variable for html
         var html = '';
 
         //Defines html to be appended
         html += `
-            <h4 class="text-center text-uppercase">${currentWeatherCity}  ${currentWeatherTime}</h4>
+            <h4 class="text-center text-uppercase">Currently</h4>
             <hr>
 
             <div class="weatherWidget text-center text-uppercase">
                 <div class="col-12">
                     <div class="row">
                         <div class="col">
-                            <h5>Today ${currentWeatherDate}<h5>
+                            <h6>${currentWeatherDay} ${currentWeatherTime}<h6>
                         </div>
                     </div>
 
@@ -119,13 +120,13 @@ $(function(){
                     
                     <div class="row">
                         <div class="col">
-                            <h5>${currentWeatherTempHigh} &deg;C / ${currentWeatherTempLow} &deg;C</h5>
+                            <h6>${currentWeatherTempHigh} &deg;C / ${currentWeatherTempLow} &deg;C</h6>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="col">
-                            <h5>${currentWeatherDescription}</h5>
+                            <h6>${currentWeatherDescription}</h6>
                         </div>
                     </div>
                 </div>
@@ -150,12 +151,12 @@ $(function(){
         
         for (var i = 8; i < forecastResponse.list.length; i= i+8) {
 
-            var forecastWeatherDay = moment.unix(forecastResponse.list[i].dt).format("dddd") || 'Data Not Available';
-            var forecastWeatherTempHigh = Math.round(forecastResponse.list[i].main.temp_max - 273.15)  || 'Data Not Available';
-            var forecastWeatherTempLow = Math.round(forecastResponse.list[i].main.temp_min - 273.15)  || 'Data Not Available';
-            var forecastWeatherDescription = forecastResponse.list[i].weather[0].description || 'Data Not Available';
-            var forecastWeatherIcon = weatherIcons[forecastResponse.list[i].weather[0].icon] || 'Data Not Available';
-            var forecastWeatherTime = moment.unix(forecastResponse.list[i].dt).format('LT') || 'Data Not Available';
+            var forecastWeatherDay = moment.unix(forecastResponse.list[i].dt).format("dddd") || 'N/A';
+            var forecastWeatherTempHigh = Math.round(forecastResponse.list[i].main.temp_max - 273.15)  || 'N/A';
+            var forecastWeatherTempLow = Math.round(forecastResponse.list[i].main.temp_min - 273.15)  || 'N/A';
+            var forecastWeatherDescription = forecastResponse.list[i].weather[0].description || 'N/A';
+            var forecastWeatherIcon = weatherIcons[forecastResponse.list[i].weather[0].icon] || 'N/A';
+            var forecastWeatherTime = moment.unix(forecastResponse.list[i].dt).format('LT') || 'N/A';
         
         //Variable for title and html
         var html = '';

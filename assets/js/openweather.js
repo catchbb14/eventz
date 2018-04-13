@@ -33,7 +33,7 @@ $(function(){
     
     //On-click function to pull zip code and city from the search input and search API for information
     $('#searchWeather').click(function (){
-     
+        
         zipcodeWeather = $('#zipcodeWeather').val();
         $('#zipcodeWeather').val('');
 
@@ -137,11 +137,15 @@ $(function(){
 
     //Function to pull information for the forecast weather and print to html
     function  createForecastWeatherElements(forecastResponse) {
-        
+
         $('#forecastTitle').html('<h4 class="text-uppercase">General Forecast</h4><hr>');
 
         //Empties html at the currentWeather id location
         $('#forecastWidgets').empty();
+       
+        if ($('#forecastWidgets').hasClass('slick-initialized')) {
+            $('#forecastWidgets').slick('unslick');
+        };
        
         
         for (var i = 8; i < forecastResponse.list.length; i= i+8) {

@@ -41,7 +41,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="signinDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sign In
               </a>
-              <div class="dropdown-menu">
+              <div class="dropdown-menu" style="width: max-content">
                   <form class="px-4 py-3">
                     <div class="form-group">
                       <label for="signinEmail">Email address</label>
@@ -51,18 +51,10 @@
                       <label for="signinPassword">Password</label>
                       <input type="password" class="form-control" id="signinPassword" placeholder="Password">
                     </div>
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                      <label class="form-check-label" for="dropdownCheck">
-                        Remember me
-                      </label>
-                      <br><br>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" id="signinButton" class="btn btn-primary">Sign in</button>
                   </form>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" data-toggle="modal" data-target="#signupModal" href="#signupModal">Sign up</a>
-                  <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
             </li>
 
@@ -109,7 +101,7 @@
 
             </li>
             <li class="nav-item">
-              <a id="logout" class="nav-link rounded" href="#logout">Logout</a>
+              <a id="logout" class="nav-link rounded" href="Javascript:">Logout</a>
             </li>
           </ul>
         </div>

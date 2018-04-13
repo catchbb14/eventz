@@ -1,5 +1,5 @@
 
-
+var loggedInState = "false";
 
 
 var UserAuthentication = function() {
@@ -11,23 +11,44 @@ var UserAuthentication = function() {
         var state = form.find('#user-state').val(); 
 
         userApp.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+
             var errorCode = error.code;
             var errorMessage = error.code;
+
+            alert(errorMessage)
+            console.log(error);
         });
-        return !false;
+        
+        $('#signupModal').modal('hide');
+        
     }
+
+    function authStateListner() {
+        userApp.auth().onAuthStateChanged( function(user) {
+            if(user) {
+                loggedInState = true;
+                console.log(user);
+            }
+        })
+    }
+
+    
     
     function clickEventHandlers() {
         'use strict';
         $(document).on('click', '#submitNewUser', function(event) {
-            if(captureInput($('#sign-up-form'))) {
-                
-            }  
+            event.preventDefault();
+            captureInput($('#sign-up-form'));  
+        })
+        $(document).on('click', '#signinButton', function(event) {
+            event.preventDefault();
+            captureInput($('#sign-up-form'));  
         })
     }
     
     function init() {
         clickEventHandlers();
+        authStateListner();
     }
 
     return {

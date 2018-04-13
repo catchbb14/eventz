@@ -1,9 +1,12 @@
 
-var loggedInState = "false";
-
-
 var UserAuthentication = function() {
+    
+    var currentUID; 
 
+    function saveEventCurrentUser(event) {
+        console.log(event);
+    }
+    
     function captureInput(form) {
         var email = form.find('#user-email').val().trim();
         var password = form.find('#user-password').val().trim();
@@ -13,7 +16,7 @@ var UserAuthentication = function() {
         userApp.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
 
             var errorCode = error.code;
-            var errorMessage = error.code;
+            var errorMessage = error.message;
 
             alert(errorMessage)
             console.log(error);
@@ -23,13 +26,56 @@ var UserAuthentication = function() {
         
     }
 
+    function signInHandler() {
+        var email = $('#signinEmail').val().trim();
+        var password = $('#signinPassword').val();
+
+        userApp.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            alert(errorMessage);
+            console.log(error);
+        });
+
+        
+
+
+    }
+
     function authStateListner() {
+
         userApp.auth().onAuthStateChanged( function(user) {
+            //  TO BE ADDED
+            // var saveEventBtn = document.getElementsByClassName('btn-save-event');
+            // for (var elem = 0; elem < saveEventBtn.length; i++) {
+            //     saveEventBtn[elem].toggle();
+            // }
+            
+            if(user && curentUID === user.uid) {
+                return;
+            }
+            
             if(user) {
-                loggedInState = true;
-                console.log(user);
+                currentUID = user.uid;
+
+                writeUserData(user.uid, user.email);
+                displaySavedEvents();
+                
+                
+            } else {
+                currentUID = null;
             }
         })
+    }
+
+    function writeUserData(userID, email) {
+
+        userDatabase.database().ref('users/' + userID).set({
+            email: email
+        })
+
     }
 
     
@@ -40,9 +86,16 @@ var UserAuthentication = function() {
             event.preventDefault();
             captureInput($('#sign-up-form'));  
         })
+
         $(document).on('click', '#signinButton', function(event) {
             event.preventDefault();
-            captureInput($('#sign-up-form'));  
+            signInHandler();
+        })
+
+        $(document).on('click', '.btn-save-event', function() {
+            
+            console.log($(this).parent().parent().attr("data-event-id"))
+            saveEventCurrentUser($(event).parent().parent().attr("data-event-id"));
         })
     }
     

@@ -13,6 +13,7 @@ Eventz is a website that allows a user to search for events based on the event n
     │   │   ├── openweather.js       # OpenWeatherMap module
     │   │   ├── popular-search.js    # Masthead recent/popular search module
     │   │   ├── save-to-favorites.js # Save events to favorites in database module
+    │   │   ├── search-validation.js # Validate search form input
     │   │   ├── ticketmaster.js      # Ticketmaster modules
     │   │   └── weatherbit.js        # Weatherbit module
     │   └── stylesheets
@@ -63,6 +64,10 @@ Module.start();
 * [Ticketmaster API](https://developer.ticketmaster.com/products-and-docs/) - For event data
 
 * [Bootstrap](https://getbootstrap.com/) - For html layout and CSS
+
+* [jQuery](https://jquery.com/) - For quicker development
+
+* [jQuery UI](https://jqueryui.com/) - For autocomplete
 
 * [Moment.js](https://momentjs.com/) - For displaying time
 

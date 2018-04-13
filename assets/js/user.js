@@ -53,15 +53,17 @@ var UserAuthentication = function() {
             //     saveEventBtn[elem].toggle();
             // }
             
+            
             if(user && currentUID === user.uid) {
                 return;
             }
             
             if(user) {
+                console.log("Current user is: " + user.email);
                 currentUID = user.uid;
 
                 writeUserData(user.uid, user.email);
-                displaySavedEvents();
+                //displaySavedEvents();
                 
                 
             } else {
@@ -72,7 +74,7 @@ var UserAuthentication = function() {
 
     function writeUserData(userID, email) {
 
-        userDatabase.database().ref('users/' + userID).set({
+        userApp.database().ref('users/' + userID).set({
             email: email
         })
 

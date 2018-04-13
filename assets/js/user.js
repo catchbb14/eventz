@@ -53,7 +53,7 @@ var UserAuthentication = function() {
             //     saveEventBtn[elem].toggle();
             // }
             
-            if(user && curentUID === user.uid) {
+            if(user && currentUID === user.uid) {
                 return;
             }
             
@@ -93,9 +93,8 @@ var UserAuthentication = function() {
         })
 
         $(document).on('click', '.btn-save-event', function() {
-            
-            console.log($(this).parent().parent().attr("data-event-id"))
-            saveEventCurrentUser($(event).parent().parent().attr("data-event-id"));
+
+            saveEventCurrentUser($(this).parent().parent().attr("data-event-id"));
         })
     }
     

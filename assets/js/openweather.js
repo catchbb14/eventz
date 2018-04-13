@@ -1,4 +1,3 @@
-console.log('openweather.js')
 
 $(function(){
  
@@ -48,8 +47,8 @@ $(function(){
     function searchOpenWeatherAPI () {
               
         //Variables to for URLs that use the API keys, there's one for daily weather and another for five day forecast for every three hours
-        var queryURLforecast = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey; 
-        var queryURLweather = 'http://api.openweathermap.org/data/2.5/weather?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey;     
+        var queryURLforecast = 'https://api.openweathermap.org/data/2.5/forecast?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey; 
+        var queryURLweather = 'https://api.openweathermap.org/data/2.5/weather?zip=' + zipcodeWeather + '&q=' + cityWeather+ '&appid=' + APIKey;     
 
         $.ajax({
             type: "GET",
@@ -67,7 +66,6 @@ $(function(){
             url: queryURLforecast,
             success: function(forecastResponse) {
                 createForecastWeatherElements(forecastResponse);
-                console.log(forecastResponse);
             },
             error: function(xhr, status, err) {
                 console.log('Error with SearchOpenWeatherAPI ' + err);
@@ -200,10 +198,6 @@ $(function(){
             slidesToShow: 3,
             slidesToScroll: 3
         });
-
     };
-
- 
-
 });    
 

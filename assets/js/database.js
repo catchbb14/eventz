@@ -23,4 +23,5 @@ var userConfig = {
 };
 var userApp = firebase.initializeApp(userConfig, 'userData');
 var userDatabase = userApp.database();
+var userRef = userApp.database().ref('users/');
 
